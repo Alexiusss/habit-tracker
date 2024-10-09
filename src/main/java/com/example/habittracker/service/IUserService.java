@@ -15,7 +15,7 @@ public interface IUserService {
 
     UserResponseTo create(UserRequestTo user);
 
-    void update (User user);
+    void update (UserRequestTo user);
 
     void delete(int id);
 }
