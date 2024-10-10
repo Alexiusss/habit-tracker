@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
@@ -15,7 +16,8 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class User extends NamedEntity{
+@SuperBuilder
+public class User extends NamedEntity implements HasId {
     private String email;
     private String password;
     private boolean isActive;

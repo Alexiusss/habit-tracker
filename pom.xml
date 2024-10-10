@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.version>1.18.34</lombok.version>
         <junit.jupiter.version>5.10.3</junit.jupiter.version>
+        <mockito.junit.jupiter>5.4.0</mockito.junit.jupiter>
         <mockito.version>5.13.0</mockito.version>
         <assertj.version>3.25.3</assertj.version>
     </properties>
@@ -36,6 +37,12 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.junit.jupiter}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
