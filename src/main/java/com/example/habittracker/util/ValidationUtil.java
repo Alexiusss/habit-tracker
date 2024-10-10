@@ -43,7 +43,7 @@ public class ValidationUtil {
 
     }
 
-    private static void validateEmail(String email) {
+    public static void validateEmail(String email) {
         checkString(email, "Email");
         boolean isEmailValid = EMAIL_REGEX.matcher(email).find();
         if (!isEmailValid) {
@@ -51,7 +51,7 @@ public class ValidationUtil {
         }
     }
 
-    private static void validatePassword(String password) {
+    public static void validatePassword(String password) {
         checkString(password, "Password");
         boolean isPasswordValid = PASSWORD_REGEX.matcher(password).find();
         if (!isPasswordValid) {
