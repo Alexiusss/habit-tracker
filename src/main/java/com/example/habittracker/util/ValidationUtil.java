@@ -1,8 +1,16 @@
 package com.example.habittracker.util;
 
 import com.example.habittracker.exception.NotFoundException;
+import com.example.habittracker.exception.EmailNotValidException;
+import com.example.habittracker.exception.PasswordNotValidException;
+import com.example.habittracker.model.User;
+
+import java.util.regex.Pattern;
 
 public class ValidationUtil {
+    private static final Pattern EMAIL_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PASSWORD_REGEX = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{8,}$", Pattern.CASE_INSENSITIVE);
+
     public static void assertNotNull(Object o, String message) {
         if (o == null) {
             throw new NullPointerException(message);
@@ -26,6 +34,35 @@ public class ValidationUtil {
     public static void checkNotFound(boolean found, String msg) {
         if (!found) {
             throw new NotFoundException("Not found entity with " + msg);
+        }
+    }
+
+    public static void validate(User user) {
+        validateEmail(user.getEmail());
+        validatePassword(user.getPassword());
+
+    }
+
+    private static void validateEmail(String email) {
+        checkString(email, "Email");
+        boolean isEmailValid = EMAIL_REGEX.matcher(email).find();
+        if (!isEmailValid) {
+            throw new EmailNotValidException("Email address isn't valid");
+        }
+    }
+
+    private static void validatePassword(String password) {
+        checkString(password, "Password");
+        boolean isPasswordValid = PASSWORD_REGEX.matcher(password).find();
+        if (!isPasswordValid) {
+            throw new PasswordNotValidException("Password address isn't valid");
+        }
+
+    }
+
+    private static void checkString(String string, String message) {
+        if (string == null || string.isEmpty()) {
+            throw new NullPointerException(message + " must not be empty");
         }
     }
 }
