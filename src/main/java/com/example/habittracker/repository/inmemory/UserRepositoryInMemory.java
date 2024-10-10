@@ -2,6 +2,7 @@ package com.example.habittracker.repository.inmemory;
 
 import com.example.habittracker.model.User;
 import com.example.habittracker.repository.UserRepository;
+import com.example.habittracker.util.ValidationUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -13,9 +14,14 @@ public class UserRepositoryInMemory extends BaseRepositoryInMemory implements Us
 
     @Override
     public User save(User user) {
-        user.setId(globalId.incrementAndGet());
-        users.put(user.getId(), user);
-        return users.get(user.getId());
+        ValidationUtil.validate(user);
+        if (user.isNew()) {
+            user.setId(globalId.incrementAndGet());
+            users.put(user.getId(), user);
+            return user;
+        } else {
+            return users.computeIfPresent(user.getId(), (id, oldUser) -> user);
+        }
     }
 
     @Override
