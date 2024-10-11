@@ -3,6 +3,7 @@ package com.example.habittracker.util;
 import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.exception.EmailNotValidException;
 import com.example.habittracker.exception.PasswordNotValidException;
+import com.example.habittracker.model.Habit;
 import com.example.habittracker.model.User;
 
 import java.util.regex.Pattern;
@@ -40,10 +41,17 @@ public class ValidationUtil {
     public static void validate(User user) {
         validateEmail(user.getEmail());
         validatePassword(user.getPassword());
-
     }
 
-    public static void validateEmail(String email) {
+    public static void validate(Habit habit) {
+        checkString(habit.getName(), "Name");
+        checkString(habit.getName(), "Name");
+        if (habit.getFrequency() == null) {
+            throw new NullPointerException("Frequency must no be null");
+        }
+    }
+
+    public static void validateEmail(CharSequence email) {
         checkString(email, "Email");
         boolean isEmailValid = EMAIL_REGEX.matcher(email).find();
         if (!isEmailValid) {
@@ -51,7 +59,7 @@ public class ValidationUtil {
         }
     }
 
-    public static void validatePassword(String password) {
+    public static void validatePassword(CharSequence password) {
         checkString(password, "Password");
         boolean isPasswordValid = PASSWORD_REGEX.matcher(password).find();
         if (!isPasswordValid) {
@@ -60,7 +68,7 @@ public class ValidationUtil {
 
     }
 
-    private static void checkString(String string, String message) {
+    private static void checkString(CharSequence string, String message) {
         if (string == null || string.isEmpty()) {
             throw new NullPointerException(message + " must not be empty");
         }
