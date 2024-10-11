@@ -1,4 +1,4 @@
-package com.example.habittracker.dto.out;
+package com.example.habittracker.dto;
 
 public record UserResponseTo(
         Integer id,

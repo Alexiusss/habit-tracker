@@ -1,7 +1,7 @@
 package com.example.habittracker.util;
 
-import com.example.habittracker.dto.in.UserRequestTo;
-import com.example.habittracker.dto.out.UserResponseTo;
+import com.example.habittracker.dto.UserRequestTo;
+import com.example.habittracker.dto.UserResponseTo;
 import com.example.habittracker.model.Role;
 import com.example.habittracker.model.User;
 import lombok.experimental.UtilityClass;

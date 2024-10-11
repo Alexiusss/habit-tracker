@@ -1,7 +1,6 @@
 package com.example.habittracker.service;
 
-import com.example.habittracker.dto.in.UserRequestTo;
-import com.example.habittracker.dto.out.UserResponseTo;
+import com.example.habittracker.dto.UserResponseTo;
 import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.model.User;
 import com.example.habittracker.repository.UserRepository;
@@ -76,16 +75,6 @@ public class UserServiceTest {
                 .isEqualTo(UserTestData.ADMIN_FROM_DB);
     }
 
-    @Test
-    void createInvalid() {
-        Mockito.when(userRepository.save(any(User.class))).thenReturn(UserTestData.ADMIN);
-        UserResponseTo savedUser = userService.create(UserTestData.NEW_USER);
-
-        Assertions.assertThat(savedUser)
-                .usingRecursiveComparison()
-                .ignoringFields("id")
-                .isEqualTo(UserTestData.ADMIN_FROM_DB);
-    }
 
     @Test
     void update() {

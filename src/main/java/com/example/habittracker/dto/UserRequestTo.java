@@ -1,4 +1,4 @@
-package com.example.habittracker.dto.in;
+package com.example.habittracker.dto;
 
 public record UserRequestTo (
         Integer id,
