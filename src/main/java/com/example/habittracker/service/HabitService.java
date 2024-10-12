@@ -31,6 +31,13 @@ public class HabitService implements IHabitService {
                 .toList();
     }
 
+    public List<HabitTo> getAllByUserId(Integer userId) {
+        return repository.getAll().stream()
+                .filter(habit -> habit.getUserId().equals(userId))
+                .map(HabitUtil::asTo)
+                .toList();
+    }
+
     @Override
     public HabitTo create(HabitTo  habitTO, int userId) {
         assertNotNull( habitTO, "Habit must not be null");
