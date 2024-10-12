@@ -4,10 +4,7 @@ import com.example.habittracker.model.Habit;
 import com.example.habittracker.repository.HabitRepository;
 import com.example.habittracker.util.ValidationUtil;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class HabitRepositoryInMemory extends BaseRepositoryInMemory implements HabitRepository {
@@ -18,8 +15,18 @@ public class HabitRepositoryInMemory extends BaseRepositoryInMemory implements H
         ValidationUtil.validate(habit);
         if (habit.isNew()) {
             habit.setId(globalId.incrementAndGet());
+            habits.computeIfAbsent(habit.getUserId(), k -> new ArrayList<>()).add(habit);
+            return habit;
         }
-        habits.computeIfAbsent(habit.getUserId(), k -> new ArrayList<>()).add(habit);
+        habits.computeIfPresent(habit.getUserId(), (k, list) -> {
+            for (int i = 0; i < list.size(); i++) {
+                if (Objects.equals(list.get(i).getId(), habit.getId())) {
+                    list.set(i, habit);
+                    break;
+                }
+            }
+            return list;
+        });
         return habit;
     }
 
