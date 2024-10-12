@@ -5,13 +5,13 @@ import com.example.habittracker.dto.HabitTo;
 import java.util.List;
 
 public interface IHabitService {
-    HabitTo get(int id);
+    HabitTo get(int id, int userId);
 
     List<HabitTo> getAll();
 
-    HabitTo create(HabitTo habit);
+    HabitTo create(HabitTo habit, int userId);
 
-    void update(HabitTo habit);
+    void update(HabitTo habit, int userId);
 
-    void delete(int id);
+    void delete(int id, int userId);
 }

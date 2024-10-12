@@ -19,8 +19,8 @@ public class HabitService implements IHabitService {
     private final HabitRepository repository;
 
     @Override
-    public HabitTo get(int id) {
-        Habit habit = checkNotFoundWithId(repository.get(id), id);
+    public HabitTo get(int id, int userId) {
+        Habit habit = checkNotFoundWithId(repository.get(id, userId), id);
         return asTo(habit);
     }
 
@@ -32,23 +32,23 @@ public class HabitService implements IHabitService {
     }
 
     @Override
-    public HabitTo create(HabitTo  habitTO) {
+    public HabitTo create(HabitTo  habitTO, int userId) {
         assertNotNull( habitTO, "Habit must not be null");
         Habit habit = createNewFromTo(habitTO);
-        Habit savedHabit = repository.save(habit);
+        Habit savedHabit = repository.save(habit, userId);
         return asTo(savedHabit);
     }
 
     @Override
-    public void update(HabitTo  habitTo) {
-        assertNotNull( habitTo, " habit must not be null");
-        Habit habit = repository.get(habitTo.id());
+    public void update(HabitTo  habitTo, int userId) {
+        assertNotNull( habitTo, "Habit must not be null");
+        Habit habit = repository.get(habitTo.id(), userId);
         Habit updateHabit = updateFromTo(habit, habitTo);
-        repository.save(updateHabit);
+        repository.save(updateHabit, userId);
     }
 
     @Override
-    public void delete(int id) {
-        checkNotFoundWithId(repository.delete(id), id);
+    public void delete(int id, int userId) {
+        checkNotFoundWithId(repository.delete(id, userId), id);
     }
 }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class HabitUtil {
 
     public static HabitTo asTo(Habit habit) {
-        return new HabitTo(habit.getId(), habit.getName(), habit.getFrequency(), habit.isActive());
+        return new HabitTo(habit.getId(), habit.getName(), habit.getFrequency(), habit.isActive(), habit.getUserId());
     }
 
     public static Habit createNewFromTo(HabitTo habitTo) {
@@ -21,6 +21,7 @@ public class HabitUtil {
                 .name(habitTo.name())
                 .frequency(habitTo.frequency())
                 .isActive(true)
+                .userId(habitTo.userId())
                 .build();
     }
 

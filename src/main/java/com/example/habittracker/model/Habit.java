@@ -15,4 +15,5 @@ import java.time.Period;
 public class Habit extends NamedEntity implements HasId {
     private Period frequency;
     private boolean isActive;
+    private Integer userId;
 }

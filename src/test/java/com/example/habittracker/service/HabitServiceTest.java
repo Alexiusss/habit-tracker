@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
 public class HabitServiceTest {
@@ -30,8 +31,8 @@ public class HabitServiceTest {
 
     @Test
     void get() {
-        Mockito.when(habitRepository.get(HabitTestData.FIRST_HABIT_ID)).thenReturn(HabitTestData.FIRST_HABIT);
-        HabitTo habit = habitService.get(HabitTestData.FIRST_HABIT_ID);
+        Mockito.when(habitRepository.get(HabitTestData.FIRST_HABIT_ID, HabitTestData.USER_ID)).thenReturn(HabitTestData.FIRST_HABIT);
+        HabitTo habit = habitService.get(HabitTestData.FIRST_HABIT_ID,HabitTestData.USER_ID);
 
         Assertions.assertThat(habit)
                 .usingRecursiveComparison()
@@ -40,8 +41,8 @@ public class HabitServiceTest {
 
     @Test
     void getNotFound() {
-        Mockito.when(habitRepository.get(HabitTestData.NOT_FOUND_ID)).thenThrow(new NotFoundException("Not found entity with " + HabitTestData.NOT_FOUND_ID));
-        assertThrowsExactly(NotFoundException.class, () -> habitService.get(HabitTestData.NOT_FOUND_ID));
+        Mockito.when(habitRepository.get(HabitTestData.NOT_FOUND_ID, HabitTestData.USER_ID)).thenThrow(new NotFoundException("Not found entity with " + HabitTestData.NOT_FOUND_ID));
+        assertThrowsExactly(NotFoundException.class, () -> habitService.get(HabitTestData.NOT_FOUND_ID, HabitTestData.USER_ID));
     }
 
     @Test
@@ -56,8 +57,8 @@ public class HabitServiceTest {
 
     @Test
     void create() {
-        Mockito.when(habitRepository.save(any(Habit.class))).thenReturn(HabitTestData.FIRST_HABIT);
-        HabitTo savedHabit = habitService.create(HabitTestData.NEW_HABIT);
+        Mockito.when(habitRepository.save(any(Habit.class), eq(HabitTestData.USER_ID))).thenReturn(HabitTestData.FIRST_HABIT);
+        HabitTo savedHabit = habitService.create(HabitTestData.NEW_HABIT, HabitTestData.USER_ID);
 
         Assertions.assertThat(savedHabit)
                 .usingRecursiveComparison()
@@ -67,29 +68,29 @@ public class HabitServiceTest {
 
     @Test
     void update() {
-        Mockito.when(habitRepository.get(HabitTestData.SECOND_HABIT.getId())).thenReturn(HabitTestData.SECOND_HABIT);
+        Mockito.when(habitRepository.get(eq(HabitTestData.SECOND_HABIT.getId()),eq(HabitTestData.USER_ID))).thenReturn(HabitTestData.SECOND_HABIT);
         Habit updatedHabit = HabitTestData.SECOND_HABIT;
         updatedHabit.setName("Updated name");
-        Mockito.when(habitRepository.save(any(Habit.class))).thenReturn(updatedHabit);
+        Mockito.when(habitRepository.save(any(Habit.class), eq(HabitTestData.USER_ID))).thenReturn(updatedHabit);
 
-        habitService.update(HabitTestData.UPDATED_HABIT);
+        habitService.update(HabitTestData.UPDATED_HABIT, HabitTestData.USER_ID);
 
-        Mockito.verify(habitRepository).save(updatedHabit);
+        Mockito.verify(habitRepository).save(updatedHabit, HabitTestData.USER_ID);
     }
 
 
     @Test
     void delete() {
-        Mockito.when(habitRepository.delete(HabitTestData.FIRST_HABIT_ID)).thenReturn(true);
-        habitService.delete(HabitTestData.FIRST_HABIT_ID);
+        Mockito.when(habitRepository.delete(HabitTestData.FIRST_HABIT_ID, HabitTestData.USER_ID)).thenReturn(true);
+        habitService.delete(HabitTestData.FIRST_HABIT_ID, HabitTestData.USER_ID);
 
-        Mockito.verify(habitRepository).delete(HabitTestData.FIRST_HABIT_ID);
+        Mockito.verify(habitRepository).delete(HabitTestData.FIRST_HABIT_ID, HabitTestData.USER_ID);
     }
 
     @Test
     void deleteNotFound() {
-        Mockito.when(habitRepository.delete(HabitTestData.NOT_FOUND_ID)).thenReturn(false);
-        assertThrowsExactly(NotFoundException.class, () -> habitService.delete(HabitTestData.NOT_FOUND_ID));
+        Mockito.when(habitRepository.delete(HabitTestData.NOT_FOUND_ID, HabitTestData.USER_ID)).thenReturn(false);
+        assertThrowsExactly(NotFoundException.class, () -> habitService.delete(HabitTestData.NOT_FOUND_ID, HabitTestData.USER_ID));
     }
 
 }

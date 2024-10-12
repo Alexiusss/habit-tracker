@@ -45,9 +45,11 @@ public class ValidationUtil {
 
     public static void validate(Habit habit) {
         checkString(habit.getName(), "Name");
-        checkString(habit.getName(), "Name");
         if (habit.getFrequency() == null) {
-            throw new NullPointerException("Frequency must no be null");
+            throw new NullPointerException("Frequency must not be null");
+        }
+        if(habit.getUserId() == null) {
+            throw new NullPointerException("User id must not be null");
         }
     }
 

@@ -6,6 +6,7 @@ public record HabitTo(
         Integer id,
         String name,
         Period frequency,
-        boolean isActive
+        boolean isActive,
+        Integer userId
 ) {
 }
