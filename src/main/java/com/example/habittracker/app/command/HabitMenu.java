@@ -71,9 +71,7 @@ public class HabitMenu implements Command {
     private void printMenu() {
         List<HabitTo> habits = habitService.getAllByUserId(securityUtil.getCurrentUserProfile().id());
         System.out.print("""
-                 ==============================
                             Habits
-                 ==============================
                 """);
         printTable(habits);
         System.out.println("""
@@ -88,27 +86,29 @@ public class HabitMenu implements Command {
     }
 
     private void printTable(List<HabitTo> habits) {
-        System.out.println("=============================================================================================");
+        System.out.println("==================================================");
         if (habits.isEmpty()) {
             System.out.println("No habits have been added yet");
         } else
-            System.out.printf("%5s %20s %12s %10s", "ID", "NAME", "FREQUENCY", "status");
+            System.out.printf("%5s %10s %12s %10s", "ID", "NAME", "FREQUENCY", "status");
         System.out.println();
-        System.out.println("=============================================================================================");
+        System.out.println("==================================================");
 
 
         for (HabitTo habit : habits) {
-            System.out.format("%7s %22s %14s %12s", habit.id(), habit.name(), habit.frequency().getDays() == 1 ? " Daily" : "Weekly", habit.isActive() ? "Active" : "Inactive");
+            System.out.format("%5s %12s %14s %10s", habit.id(), habit.name(), habit.frequency().getDays() == 1 ? " Daily" : "Weekly", habit.isActive() ? "Active" : "Inactive");
             System.out.println();
         }
-        System.out.println("=============================================================================================-");
+        if (!habits.isEmpty()) {
+            System.out.println("==================================================");
+        }
     }
 
     private int getHabitIdFromInput(String message) {
         HabitTo habit = null;
         while (habit == null) {
             try {
-                String id = userInputReader.getUserInput("id of habit for "  + message);
+                String id = userInputReader.getUserInput("id of habit for " + message);
                 int habitId = Integer.parseInt(id);
                 habit = habitService.get(habitId, securityUtil.getCurrentUserProfile().id());
             } catch (NullPointerException | NumberFormatException | NotFoundException e) {
