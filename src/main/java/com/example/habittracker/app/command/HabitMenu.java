@@ -49,7 +49,10 @@ public class HabitMenu implements Command {
                     openMenu(invoker, new HabitMenu(commandContext));
                     yield true;
                 }
-                //case "4" -> true;
+                case "4" -> {
+                    openMenu(invoker, new HabitListMenu(commandContext));
+                    yield true;
+                }
                 case "5" -> {
                     openMenu(invoker, new StatisticsAndAnalyticsMenu(commandContext));
                     yield true;
@@ -67,11 +70,9 @@ public class HabitMenu implements Command {
     }
 
     private void printMenu() {
-        List<HabitTo> habits = habitService.getAllByUserId(securityUtil.getCurrentUserProfile().id());
         System.out.print("""
-                            Habits
+                        Habits menu
                 """);
-        printTable(habits);
         System.out.println("""
                 1. Create
                 2. Edit
@@ -81,25 +82,6 @@ public class HabitMenu implements Command {
                 6. Return to main menu
 
                 Enter your choice:\s""");
-    }
-
-    private void printTable(List<HabitTo> habits) {
-        System.out.println("==================================================");
-        if (habits.isEmpty()) {
-            System.out.println("No habits have been added yet");
-        } else
-            System.out.printf("%5s %10s %12s %10s", "ID", "NAME", "FREQUENCY", "status");
-        System.out.println();
-        System.out.println("==================================================");
-
-
-        for (HabitTo habit : habits) {
-            System.out.format("%5s %12s %14s %10s", habit.id(), habit.name(), habit.frequency().getDays() == 1 ? " Daily" : "Weekly", habit.isActive() ? "Active" : "Inactive");
-            System.out.println();
-        }
-        if (!habits.isEmpty()) {
-            System.out.println("==================================================");
-        }
     }
 
     private int getHabitIdFromInput(String message) {

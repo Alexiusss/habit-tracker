@@ -12,4 +12,6 @@ public interface HabitRepository {
     Habit get(int id, int userId);
 
     List<Habit> getAll();
+
+    List<Habit> getAllByUserId(Integer userId);
 }

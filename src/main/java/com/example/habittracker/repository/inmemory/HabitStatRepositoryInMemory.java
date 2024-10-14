@@ -4,6 +4,7 @@ import com.example.habittracker.model.HabitStat;
 import com.example.habittracker.repository.HabitStatRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,24 +14,26 @@ public class HabitStatRepositoryInMemory extends BaseRepositoryInMemory implemen
     @Override
     public HabitStat save(HabitStat habitStat) {
         if (isHabitStatAlreadyExistsForToday(habitStat)) {
-            throw new IllegalArgumentException("A HabitStat already exists for habit id: " + habitStat.getHabitId() + " for today.");
+            throw new IllegalArgumentException("A habit wit id  " + habitStat.getHabitId() + " already marked as completed for today.");
         }
         habitStat.setId(globalId.incrementAndGet());
+        habitStat.setCreatedAt(LocalDateTime.now());
         habitStats.computeIfAbsent(habitStat.getUserId(), k -> new ArrayList<>()).add(habitStat);
         return habitStat;
     }
 
     @Override
-    public void deleteAllByUserIdAndHabitId(Integer userId, Integer habitId) {
+    public boolean deleteAllByUserIdAndHabitId(Integer userId, Integer habitId) {
         habitStats.computeIfPresent(userId, (k, list) -> {
             list.removeIf(habitStat -> habitStat.getHabitId().equals(habitId));
             return list.isEmpty() ? null : list;
         });
+        return habitStats.get(userId) == null;
     }
 
     private boolean isHabitStatAlreadyExistsForToday(HabitStat habitStat) {
         LocalDate today = LocalDate.now();
-        return habitStats.get(habitStat.getUserId())
+        return habitStats.getOrDefault(habitStat.getUserId(), List.of())
                 .stream()
                 .anyMatch(existingStat ->
                         existingStat.getHabitId().equals(habitStat.getHabitId()) &&

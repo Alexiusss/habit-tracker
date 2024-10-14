@@ -7,6 +7,7 @@ import com.example.habittracker.util.HabitUtil;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import static com.example.habittracker.util.HabitUtil.*;
 import static com.example.habittracker.util.ValidationUtil.assertNotNull;
@@ -31,9 +32,9 @@ public class HabitService implements IHabitService {
                 .toList();
     }
 
-    public List<HabitTo> getAllByUserId(Integer userId) {
-        return repository.getAll().stream()
-                .filter(habit -> habit.getUserId().equals(userId))
+    public List<HabitTo> getAllByUserId(Integer userId, Predicate<Habit> predicate) {
+        return repository.getAllByUserId(userId).stream()
+                .filter(predicate)
                 .map(HabitUtil::asTo)
                 .toList();
     }

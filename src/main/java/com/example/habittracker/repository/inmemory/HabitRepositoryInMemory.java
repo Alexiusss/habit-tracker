@@ -2,6 +2,7 @@ package com.example.habittracker.repository.inmemory;
 
 import com.example.habittracker.model.Habit;
 import com.example.habittracker.repository.HabitRepository;
+import com.example.habittracker.repository.HabitStatRepository;
 import com.example.habittracker.util.ValidationUtil;
 
 import java.util.*;
@@ -9,6 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class HabitRepositoryInMemory extends BaseRepositoryInMemory implements HabitRepository {
     private final Map<Integer, List<Habit>> habits = new ConcurrentHashMap<>();
+
+    private final HabitStatRepository habitStatRepository = new HabitStatRepositoryInMemory();
 
     @Override
     public Habit save(Habit habit, int userId) {
@@ -31,9 +34,10 @@ public class HabitRepositoryInMemory extends BaseRepositoryInMemory implements H
     }
 
     @Override
-    public boolean delete(int id, int userId) {
+    public boolean delete(int userId, int habitId) {
         List<Habit> userHabits = habits.get(userId);
-        return userHabits.removeIf(habitStat -> habitStat.getId() == id);
+        return userHabits.removeIf(habitStat -> habitStat.getId() == habitId) &&
+                habitStatRepository.deleteAllByUserIdAndHabitId(userId, habitId);
     }
 
     @Override
@@ -49,5 +53,10 @@ public class HabitRepositoryInMemory extends BaseRepositoryInMemory implements H
         return habits.values().stream()
                 .flatMap(Collection::stream)
                 .toList();
+    }
+
+    public List<Habit> getAllByUserId(Integer userId) {
+        List<Habit> userHabits = this.habits.get(userId);
+        return userHabits == null ? List.of() : userHabits;
     }
 }

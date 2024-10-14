@@ -14,8 +14,8 @@ public class HabitStatService {
     private final HabitRepository habitRepository;
     private final HabitStatRepository habitStatRepository;
 
-    public void markAsCompleted(Integer userid, Integer habitId) {
-        habitStatRepository.save(new HabitStat(userid, habitId));
+    public boolean markAsCompleted(Integer userid, Integer habitId) {
+        return habitStatRepository.save(new HabitStat(userid, habitId)) != null;
     }
 
     public void deleteAllByUserIdAndHabitId(Integer userId, Integer habitId) {
