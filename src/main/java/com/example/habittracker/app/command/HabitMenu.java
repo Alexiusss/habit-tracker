@@ -1,8 +1,5 @@
 package com.example.habittracker.app.command;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import com.example.habittracker.app.UserInputReader;
 import com.example.habittracker.dto.HabitTo;
 import com.example.habittracker.exception.NotFoundException;
