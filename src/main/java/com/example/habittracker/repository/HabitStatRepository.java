@@ -2,6 +2,8 @@ package com.example.habittracker.repository;
 
 import com.example.habittracker.model.HabitStat;
 
+import java.util.List;
+
 public interface HabitStatRepository {
     HabitStat save(HabitStat habitStat);
     boolean deleteAllByUserIdAndHabitId(Integer userId, Integer habitId);

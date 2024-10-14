@@ -40,4 +40,9 @@ public class HabitStatRepositoryInMemory extends BaseRepositoryInMemory implemen
                                 existingStat.getCreatedAt().toLocalDate().equals(today)
                 );
     }
+
+    @Override
+    public List<HabitStat> getAllByUserId(Integer userId) {
+        return habitStats.getOrDefault(userId, List.of());
+    }
 }
