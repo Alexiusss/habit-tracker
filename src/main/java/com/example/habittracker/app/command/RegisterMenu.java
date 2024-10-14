@@ -10,6 +10,8 @@ import com.example.habittracker.service.IUserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import static com.example.habittracker.util.ConsoleUtil.openMenu;
+
 @AllArgsConstructor
 public class RegisterMenu implements Command {
 
@@ -46,7 +48,6 @@ public class RegisterMenu implements Command {
         }
         System.out.println("User successfully registered. Sign in with your email and password.\n\n\n");
 
-        invoker.setCommand(new LoginMenu(commandContext));
-        invoker.executeCommand();
+        openMenu(invoker, new LoginMenu(commandContext));
     }
 }

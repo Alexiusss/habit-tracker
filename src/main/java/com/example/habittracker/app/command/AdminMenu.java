@@ -3,6 +3,8 @@ package com.example.habittracker.app.command;
 import com.example.habittracker.app.UserInputReader;
 import com.example.habittracker.util.SecurityUtil;
 
+import static com.example.habittracker.util.ConsoleUtil.openMenu;
+
 public class AdminMenu implements Command {
     private final UserInputReader userInputReader;
     private final SecurityUtil securityUtil;
@@ -26,8 +28,7 @@ public class AdminMenu implements Command {
             String choice = userInputReader.getUserChoice();
             exit = switch (choice) {
                 case "1" -> {
-                    invoker.setCommand(new MainMenu(commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new MainMenu(commandContext));
                     yield true;
                 }
                 default -> {

@@ -6,6 +6,7 @@ import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.exception.PasswordNotValidException;
 import com.example.habittracker.util.SecurityUtil;
 
+import static com.example.habittracker.util.ConsoleUtil.openMenu;
 
 public class LoginMenu implements Command {
 
@@ -38,7 +39,6 @@ public class LoginMenu implements Command {
                 System.out.println(e.getMessage());
             }
         }
-        invoker.setCommand(new MainMenu(commandContext));
-        invoker.executeCommand();
+        openMenu(invoker, new MainMenu(commandContext));
     }
 }

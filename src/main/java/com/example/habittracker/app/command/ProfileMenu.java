@@ -1,8 +1,9 @@
 package com.example.habittracker.app.command;
 
 import com.example.habittracker.app.UserInputReader;
-import com.example.habittracker.app.command.*;
 import com.example.habittracker.util.SecurityUtil;
+
+import static com.example.habittracker.util.ConsoleUtil.openMenu;
 
 public class ProfileMenu implements Command {
     private final UserInputReader userInputReader;
@@ -27,19 +28,16 @@ public class ProfileMenu implements Command {
             String choice = userInputReader.getUserChoice();
             exit = switch (choice) {
                 case "1" -> {
-                    invoker.setCommand(new ProfileEditorMenu(commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new ProfileEditorMenu(commandContext));
                     yield true;
                 }
                 case "2" -> {
                     deleteAccount();
-                    invoker.setCommand(new StartMenu(commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new StartMenu(commandContext));
                     yield true;
                 }
                 case "3" -> {
-                    invoker.setCommand(new MainMenu(commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new MainMenu(commandContext));
                     yield true;
                 }
                 default -> {

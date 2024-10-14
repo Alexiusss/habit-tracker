@@ -7,6 +7,8 @@ import com.example.habittracker.util.SecurityUtil;
 
 import java.time.Period;
 
+import static com.example.habittracker.util.ConsoleUtil.openMenu;
+
 public class HabitEditor implements Command {
     private final Integer habitId;
     private final UserInputReader userInputReader;
@@ -28,7 +30,6 @@ public class HabitEditor implements Command {
     public void execute() {
         printMenu();
         saveHabit();
-
     }
 
     private void printMenu() {
@@ -68,7 +69,6 @@ public class HabitEditor implements Command {
 
         System.out.println("Habit saved\n");
 
-        invoker.setCommand(new HabitMenu(commandContext));
-        invoker.executeCommand();
+        openMenu(invoker, new HabitMenu(commandContext));
     }
 }

@@ -9,6 +9,8 @@ import com.example.habittracker.exception.PasswordNotValidException;
 import com.example.habittracker.service.IUserService;
 import com.example.habittracker.util.SecurityUtil;
 
+import static com.example.habittracker.util.ConsoleUtil.openMenu;
+
 public class ProfileEditorMenu implements Command {
     private final UserInputReader userInputReader;
     private final SecurityUtil securityUtil;
@@ -34,8 +36,7 @@ public class ProfileEditorMenu implements Command {
         UserResponseTo updatedUser = userService.get(profile.id());
         printEditor(updatedUser);
 
-        invoker.setCommand(new MainMenu((commandContext)));
-        invoker.executeCommand();
+        openMenu(invoker, new MainMenu(commandContext));
     }
 
     private void printEditor(UserResponseTo profile) {

@@ -3,6 +3,8 @@ package com.example.habittracker.app.command;
 import com.example.habittracker.app.UserInputReader;
 import lombok.AllArgsConstructor;
 
+import static com.example.habittracker.util.ConsoleUtil.openMenu;
+
 @AllArgsConstructor
 public class StartMenu implements Command {
     private final UserInputReader userInputReader;
@@ -25,13 +27,11 @@ public class StartMenu implements Command {
             String choice = userInputReader.getUserChoice();
             exit = switch (choice) {
                 case "1" -> {
-                    invoker.setCommand(new LoginMenu(commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new LoginMenu(commandContext));
                     yield true;
                 }
                 case "2" -> {
-                    invoker.setCommand(new RegisterMenu(commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new RegisterMenu(commandContext));
                     yield true;
                 }
                 case "exit", "q" -> true;

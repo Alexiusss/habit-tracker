@@ -1,12 +1,15 @@
 package com.example.habittracker.app.command;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import com.example.habittracker.app.UserInputReader;
 import com.example.habittracker.dto.HabitTo;
 import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.service.HabitService;
 import com.example.habittracker.util.SecurityUtil;
 
-import java.util.List;
+import static com.example.habittracker.util.ConsoleUtil.openMenu;
 
 public class HabitMenu implements Command {
     private final UserInputReader userInputReader;
@@ -33,31 +36,26 @@ public class HabitMenu implements Command {
             String choice = userInputReader.getUserChoice();
             exit = switch (choice) {
                 case "1" -> {
-                    invoker.setCommand(new HabitEditor(null, commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new HabitEditor(null, commandContext));
                     yield true;
                 }
                 case "2" -> {
                     int id = getHabitIdFromInput("editing");
-                    invoker.setCommand(new HabitEditor(id, commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new HabitEditor(id, commandContext));
                     yield true;
                 }
                 case "3" -> {
                     deleteHabit();
-                    invoker.setCommand(new HabitMenu(commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new HabitMenu(commandContext));
                     yield true;
                 }
                 //case "4" -> true;
                 case "5" -> {
-                    invoker.setCommand(new StatisticsAndAnalyticsMenu(commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new StatisticsAndAnalyticsMenu(commandContext));
                     yield true;
                 }
                 case "6" -> {
-                    invoker.setCommand(new MainMenu(commandContext));
-                    invoker.executeCommand();
+                    openMenu(invoker, new MainMenu(commandContext));
                     yield true;
                 }
                 default -> {
