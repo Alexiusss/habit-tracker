@@ -15,7 +15,7 @@
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/Alexiusss/habit-tracker
+    git clone https://github.com/Alexiusss/habit-tracker -b HW_1
     cd habit-tracker
     ```
 2. Build the project using Maven:
@@ -30,5 +30,5 @@
     Credentials for admin access:
     ```
    login: admin@gmail.com
-   pass: admin777
+   password: admin777
    ```
