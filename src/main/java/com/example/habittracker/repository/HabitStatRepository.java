@@ -8,6 +8,8 @@ import java.util.List;
  * Repository interface for managing {@code HabitStat} entities.
  * This interface defines the operations for saving, deleting, and retrieving
  * habit statistics associated with users and their habits.
+ *
+ * @author Alexey Boyarinov
  */
 public interface HabitStatRepository {
 
