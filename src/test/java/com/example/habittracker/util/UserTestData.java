@@ -41,7 +41,7 @@ public class UserTestData {
             .roles(Set.of(Role.USER))
             .build();
 
-    public static final UserResponseTo ADMIN_FROM_DB = new UserResponseTo(ADMIN_ID, ADMIN_NAME, ADMIN_EMAIL);
+    public static final UserResponseTo ADMIN_FROM_DB = new UserResponseTo(ADMIN_ID, ADMIN_NAME, ADMIN_EMAIL, true);
 
     public static final UserRequestTo NEW_USER = new UserRequestTo(null, ADMIN_NAME, ADMIN_EMAIL, ADMIN_PASSWORD);
     public static final UserRequestTo UPDATED_USER = new UserRequestTo(USER.getId(), "Updated name", USER.getEmail(), USER.getPassword());

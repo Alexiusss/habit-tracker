@@ -17,4 +17,6 @@ public interface IUserService {
     void update(UserRequestTo user);
 
     void delete(int id);
+
+    void enable(int userId, boolean b);
 }

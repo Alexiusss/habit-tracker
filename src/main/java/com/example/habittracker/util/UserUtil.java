@@ -13,7 +13,7 @@ import java.util.Set;
 public class UserUtil {
 
     public static UserResponseTo asTo(User user) {
-        return new UserResponseTo(user.getId(), user.getName(), user.getEmail());
+        return new UserResponseTo(user.getId(), user.getName(), user.getEmail(), user.isActive());
     }
 
     public static User createNewFromTo(UserRequestTo userTo) {

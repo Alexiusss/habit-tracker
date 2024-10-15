@@ -64,4 +64,11 @@ public class UserService implements IUserService {
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
     }
+
+    @Override
+    public void enable(int id, boolean enabled) {
+        User user = repository.get(id);
+        user.setActive(false);
+        repository.save(user);
+    }
 }
