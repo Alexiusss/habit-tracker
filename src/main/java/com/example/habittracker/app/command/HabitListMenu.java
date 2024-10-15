@@ -6,6 +6,7 @@ import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.model.Habit;
 import com.example.habittracker.service.HabitService;
 import com.example.habittracker.service.HabitStatService;
+import com.example.habittracker.util.PrintUtil;
 import com.example.habittracker.util.SecurityUtil;
 
 import java.time.LocalDate;
@@ -41,7 +42,7 @@ public class HabitListMenu implements Command {
                          Habits
                 """);
         List<HabitTo> habits = habitService.getAllByUserId(securityUtil.getCurrentUserProfile().id(), predicate);
-        printTable(habits);
+        PrintUtil.printHabitTable(habits);
         handleInput();
     }
 
@@ -74,25 +75,6 @@ public class HabitListMenu implements Command {
                     yield false;
                 }
             };
-        }
-    }
-
-    private void printTable(List<HabitTo> habits) {
-        System.out.println("==================================================");
-        if (habits.isEmpty()) {
-            System.out.println("No habits have been added yet");
-        } else
-            System.out.printf("%5s %10s %12s %10s", "ID", "NAME", "FREQUENCY", "status");
-        System.out.println();
-        System.out.println("==================================================");
-
-
-        for (HabitTo habit : habits) {
-            System.out.format("%5s %12s %14s %10s", habit.id(), habit.name(), habit.frequency().getDays() == 1 ? " Daily" : "Weekly", habit.isActive() ? "Active" : "Inactive");
-            System.out.println();
-        }
-        if (!habits.isEmpty()) {
-            System.out.println("==================================================");
         }
     }
 

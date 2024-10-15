@@ -33,12 +33,12 @@ public class HabitMenu implements Command {
             String choice = userInputReader.getUserChoice();
             exit = switch (choice) {
                 case "1" -> {
-                    openMenu(invoker, new HabitEditor(null, commandContext));
+                    openMenu(invoker, new HabitEditorMenu(null, commandContext));
                     yield true;
                 }
                 case "2" -> {
                     int id = getHabitIdFromInput("editing");
-                    openMenu(invoker, new HabitEditor(id, commandContext));
+                    openMenu(invoker, new HabitEditorMenu(id, commandContext));
                     yield true;
                 }
                 case "3" -> {

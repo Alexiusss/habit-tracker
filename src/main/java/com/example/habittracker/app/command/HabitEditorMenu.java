@@ -9,7 +9,7 @@ import java.time.Period;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
 
-public class HabitEditor implements Command {
+public class HabitEditorMenu implements Command {
     private final Integer habitId;
     private final UserInputReader userInputReader;
     private final SecurityUtil securityUtil;
@@ -17,7 +17,7 @@ public class HabitEditor implements Command {
     private final HabitService habitService;
     private final CommandContext commandContext;
 
-    public HabitEditor(Integer habitId, CommandContext commandContext) {
+    public HabitEditorMenu(Integer habitId, CommandContext commandContext) {
         this.habitId = habitId;
         this.userInputReader = commandContext.getUserInputReader();
         this.securityUtil = commandContext.getSecurityUtil();
