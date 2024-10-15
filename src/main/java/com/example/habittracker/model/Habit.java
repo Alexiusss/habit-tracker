@@ -5,6 +5,11 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.Period;
 
+/**
+ * Simple JavaBean domain object representing a habit.
+ *
+ * @author Alexey Boyarinov
+ */
 @Getter
 @Setter
 @NoArgsConstructor

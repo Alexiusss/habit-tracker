@@ -10,6 +10,12 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
+/**
+ * Simple JavaBean domain object with an id property. Used as a base class for objects
+ * needing this property.
+ *
+ * @author Alexey Boyarinov
+ */
 @Getter
 @Setter
 @ToString

@@ -8,6 +8,12 @@ import lombok.ToString;
 import lombok.AccessLevel;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * Simple JavaBean domain object adds a name property to <code>BaseEntity</code>. Used as
+ * a base class for objects needing these properties.
+ *
+ * @author Alexey Boyarinov
+ */
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

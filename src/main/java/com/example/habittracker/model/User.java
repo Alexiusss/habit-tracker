@@ -10,6 +10,11 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
+/**
+ * Simple JavaBean domain object representing a user.
+ *
+ * @author Alexey Boyarinov
+ */
 @Getter
 @Setter
 @NoArgsConstructor
