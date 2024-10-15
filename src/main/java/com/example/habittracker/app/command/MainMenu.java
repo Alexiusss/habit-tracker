@@ -35,8 +35,12 @@ public class MainMenu implements Command {
                     yield true;
                 }
                 case "3" -> {
-                    openMenu(invoker, new AdminMenu(commandContext));
-                    yield true;
+                    if (securityUtil.isAdmin()) {
+                        openMenu(invoker, new AdminMenu(commandContext));
+                        yield true;
+                    } else {
+                        yield false;
+                    }
                 }
                 case "exit", "q" -> true;
                 default -> {
@@ -57,8 +61,8 @@ public class MainMenu implements Command {
                 """);
         if (securityUtil.isAdmin()) {
             System.out.println("""
-                3. Admin panel
-                """);
+                    3. Admin panel
+                    """);
         }
         System.out.println("""                
                 Type exit or q to quit
