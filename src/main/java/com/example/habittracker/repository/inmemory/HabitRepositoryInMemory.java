@@ -39,16 +39,16 @@ public class HabitRepositoryInMemory extends BaseRepositoryInMemory implements H
             habit.setId(globalId.incrementAndGet());
             habits.computeIfAbsent(habit.getUserId(), k -> new ArrayList<>()).add(habit);
             return habit;
-        }
-        habits.computeIfPresent(habit.getUserId(), (k, list) -> {
-            for (int i = 0; i < list.size(); i++) {
-                if (Objects.equals(list.get(i).getId(), habit.getId())) {
-                    list.set(i, habit);
-                    break;
+        } else
+            habits.computeIfPresent(habit.getUserId(), (k, list) -> {
+                for (int i = 0; i < list.size(); i++) {
+                    if (Objects.equals(list.get(i).getId(), habit.getId())) {
+                        list.set(i, habit);
+                        break;
+                    }
                 }
-            }
-            return list;
-        });
+                return list;
+            });
         return habit;
     }
 

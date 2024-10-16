@@ -41,8 +41,6 @@ public class AdminMenu implements Command {
                 3. Delete user
                 4. Block user
                 5. Return to main menu
-                
-                Type exit or q to quit
 
                 Enter your choice:\s""");
     }

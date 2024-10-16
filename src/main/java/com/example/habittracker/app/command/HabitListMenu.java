@@ -50,7 +50,7 @@ public class HabitListMenu implements Command {
         System.out.println("""
                 1. Set filter
                 2. Mark habit performed
-                3. Return to main menu
+                3. Return to habit menu
 
                 Enter your choice:\s""");
 
@@ -67,7 +67,7 @@ public class HabitListMenu implements Command {
                     yield true;
                 }
                 case "3" -> {
-                    openMenu(invoker, new MainMenu(commandContext));
+                    openMenu(invoker, new HabitMenu(commandContext));
                     yield true;
                 }
                 default -> {
