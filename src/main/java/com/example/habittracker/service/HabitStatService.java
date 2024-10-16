@@ -1,6 +1,7 @@
 package com.example.habittracker.service;
 
 import com.example.habittracker.dto.HabitStatTo;
+import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.model.BaseEntity;
 import com.example.habittracker.model.Habit;
 import com.example.habittracker.model.HabitStat;
@@ -14,6 +15,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.habittracker.util.ValidationUtil.checkNotFoundWithId;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
@@ -47,9 +49,10 @@ public class HabitStatService {
      *
      * @param userId  the ID of the user
      * @param habitId the ID of the habit
+     * @throws NotFoundException if no habitStat with the specified ID exists for the user
      */
-    public void deleteAllByUserIdAndHabitId(Integer userId, Integer habitId) {
-        habitStatRepository.deleteAllByUserIdAndHabitId(userId, habitId);
+    public void deleteAllByUserIdAndHabitId(Integer userId, int habitId) {
+        checkNotFoundWithId(habitStatRepository.deleteAllByUserIdAndHabitId(userId, habitId), habitId);
     }
 
     /**

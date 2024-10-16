@@ -32,7 +32,7 @@ public class HabitServiceTest {
     @Test
     void get() {
         Mockito.when(habitRepository.get(HabitTestData.FIRST_HABIT_ID, HabitTestData.USER_ID)).thenReturn(HabitTestData.FIRST_HABIT);
-        HabitTo habit = habitService.get(HabitTestData.FIRST_HABIT_ID,HabitTestData.USER_ID);
+        HabitTo habit = habitService.get(HabitTestData.FIRST_HABIT_ID, HabitTestData.USER_ID);
 
         Assertions.assertThat(habit)
                 .usingRecursiveComparison()
