@@ -10,36 +10,37 @@ import java.util.List;
 public class PrintUtil {
 
     public static void printUserTable(List<UserResponseTo> users) {
-        System.out.println("==================================================");
-            System.out.printf("%5s %10s %12s %10s", "ID", "NAME", "EMAIL", "STATUS");
-        System.out.println();
-        System.out.println("==================================================");
+        printDelimiter();
+        System.out.printf("%5s%15s%25s%15s%n", "ID", "NAME", "EMAIL", "STATUS");
+        printDelimiter();
 
         for (UserResponseTo user : users) {
-            System.out.format("%5s %12s %14s %10s", user.id(), user.name(), user.email(), user.isActive() ? "Active" : "Blocked");
-            System.out.println();
+            System.out.format("%5s%15s%25s%15s%n", user.id(), user.name(), user.email(), user.isActive() ? "Active" : "Blocked");
         }
-        System.out.println("==================================================");
+
+        printDelimiter();
         System.out.println("\s\s\s");
     }
 
     public static void printHabitTable(List<HabitTo> habits) {
-        System.out.println("==================================================");
+        printDelimiter();
         if (habits.isEmpty()) {
             System.out.println("No habits have been added yet");
         } else
-            System.out.printf("%5s %10s %12s %10s", "ID", "NAME", "FREQUENCY", "STATUS");
-        System.out.println();
-        System.out.println("==================================================");
-
+            System.out.printf("%5s%15s%25s%15s%n", "ID", "NAME", "FREQUENCY", "STATUS");
+        printDelimiter();
 
         for (HabitTo habit : habits) {
-            System.out.format("%5s %12s %14s %10s", habit.id(), habit.name(), habit.frequency().getDays() == 1 ? " Daily" : "Weekly", habit.isActive() ? "Active" : "Inactive");
-            System.out.println();
+            System.out.format("%5s%15s%25s%15s%n", habit.id(), habit.name(), habit.frequency().getDays() == 1 ? " Daily" : "Weekly", habit.isActive() ? "Active" : "Inactive");
         }
+
         if (!habits.isEmpty()) {
-            System.out.println("==================================================");
+            printDelimiter();
         }
         System.out.println("\s\s\s");
+    }
+
+    private void printDelimiter() {
+        System.out.println("==================================================================");
     }
 }

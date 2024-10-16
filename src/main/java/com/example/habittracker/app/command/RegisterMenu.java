@@ -32,11 +32,18 @@ public class RegisterMenu implements Command {
 
     @Override
     public void execute() {
+        printHeader();
+        handleInput();
+    }
+
+    private void printHeader() {
         System.out.println("=====================");
         System.out.println("    Register menu    ");
         System.out.println("=====================");
-        UserResponseTo user = null;
+    }
 
+    private void handleInput() {
+        UserResponseTo user = null;
         while (user == null) {
             String email = userInputReader.getUserInput("email");
             String password = userInputReader.getUserInput("password");

@@ -16,27 +16,19 @@ public class ProfileEditorMenu implements Command {
     private final SecurityUtil securityUtil;
     private final IUserService userService;
     private final Invoker invoker;
-    private final CommandContext commandContext;
 
     public ProfileEditorMenu(CommandContext commandContext) {
         this.userInputReader = commandContext.getUserInputReader();
         this.securityUtil = commandContext.getSecurityUtil();
         this.userService = commandContext.getUserService();
         this.invoker = commandContext.getInvoker();
-        this.commandContext = commandContext;
     }
 
     @Override
     public void execute() {
         UserResponseTo profile = securityUtil.getCurrentUserProfile();
-
         printEditor(profile);
-        updateProfile(profile);
-
-        UserResponseTo updatedUser = userService.get(profile.id());
-        printEditor(updatedUser);
-
-        openMenu(invoker, new MainMenu(commandContext));
+        handleProfileUpdate(profile);
     }
 
     private void printEditor(UserResponseTo profile) {
@@ -45,9 +37,10 @@ public class ProfileEditorMenu implements Command {
         System.out.println("======================");
         System.out.println("Email: " + profile.email());
         System.out.println("Name: " + profile.name());
+        System.out.println("\s\s\s");
     }
 
-    private void updateProfile(UserResponseTo profile) {
+    private void handleProfileUpdate(UserResponseTo profile) {
         boolean isSaved = false;
         while (!isSaved) {
             String email = userInputReader.getUserInput("email");
@@ -55,11 +48,13 @@ public class ProfileEditorMenu implements Command {
             String password = userInputReader.getUserInput("password");
             try {
                 userService.update(new UserRequestTo(profile.id(), name, email, password));
+                isSaved = true;
+                System.out.println("You profile successfully updated");
             } catch (EmailNotValidException | PasswordNotValidException | DuplicateEmailException e) {
                 System.out.println(e.getMessage());
+                System.out.println("Please try again");
             }
-            isSaved = true;
-            System.out.println("You profile successfully updated");
         }
+        openMenu(invoker, this);
     }
 }

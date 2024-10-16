@@ -21,7 +21,22 @@ public class ProfileMenu implements Command {
     @Override
     public void execute() {
         printMenu();
+        handleInput();
+    }
 
+    private void printMenu() {
+        System.out.println("""
+                ==============================
+                          Profile
+                ==============================
+                1. Profile editor
+                2. Delete account
+                3. Return to main menu
+
+                Enter your choice:\s""");
+    }
+
+    private void handleInput() {
         boolean exit = false;
 
         while (!exit) {
@@ -46,19 +61,6 @@ public class ProfileMenu implements Command {
                 }
             };
         }
-
-    }
-
-    private void printMenu() {
-        System.out.println("""
-                ==============================
-                          Profile
-                ==============================
-                1. Profile editor
-                2. Delete account
-                3. Return to main menu
-
-                Enter your choice:\s""");
     }
 
     public void deleteAccount() {

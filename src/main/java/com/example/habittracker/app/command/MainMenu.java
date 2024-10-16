@@ -21,6 +21,31 @@ public class MainMenu implements Command {
     @Override
     public void execute() {
         printMenu();
+        handleInput();
+    }
+
+    private void printMenu() {
+        System.out.print("""
+                ==========================
+                        Main menu
+                ==========================
+                1. Habits
+                2. Profile
+                """);
+        if (securityUtil.isAdmin()) {
+            System.out.println("""
+                    3. Admin panel
+                    """);
+        }
+        System.out.println("""                
+                Type exit or q to quit
+                                 
+                Enter your choice:\s
+                """);
+
+    }
+
+    private void handleInput() {
         boolean exit = false;
 
         while (!exit) {
@@ -49,26 +74,5 @@ public class MainMenu implements Command {
                 }
             };
         }
-    }
-
-    private void printMenu() {
-        System.out.print("""
-                ==========================
-                        Main menu
-                ==========================
-                1. Habits
-                2. Profile
-                """);
-        if (securityUtil.isAdmin()) {
-            System.out.println("""
-                    3. Admin panel
-                    """);
-        }
-        System.out.println("""                
-                Type exit or q to quit
-                                 
-                Enter your choice:\s
-                """);
-
     }
 }

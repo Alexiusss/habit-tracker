@@ -71,7 +71,6 @@ public class StatisticsAndAnalyticsMenu implements Command {
         }
     }
 
-
     private void printHabitStreak() {
         int countOfSuccessfulStreaks = habitStatService.getCountOfSuccessfulStreaks(getCurrentUserId());
         System.out.println("Current count of successful streak: " + countOfSuccessfulStreaks);
@@ -92,13 +91,11 @@ public class StatisticsAndAnalyticsMenu implements Command {
                 System.out.println("Please try again...");
             }
             System.out.println("""
-                \s""");
+                    \s""");
         }
     }
 
     private int getCurrentUserId() {
         return securityUtil.getCurrentUserProfile().id();
     }
-
-
 }

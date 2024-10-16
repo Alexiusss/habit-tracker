@@ -24,9 +24,17 @@ public class LoginMenu implements Command {
 
     @Override
     public void execute() {
+        printHeader();
+        handleInput();
+    }
+
+    private void printHeader() {
         System.out.println("=====================");
         System.out.println("     Login menu      ");
         System.out.println("=====================");
+    }
+
+    private void handleInput() {
         boolean isAuth = false;
 
         while (!isAuth) {

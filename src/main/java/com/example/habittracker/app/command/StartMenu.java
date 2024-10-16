@@ -21,6 +21,23 @@ public class StartMenu implements Command {
     @Override
     public void execute() {
         printMenu();
+        handleInput();
+    }
+
+    private void printMenu() {
+        System.out.println("""
+                ==============================
+                      Habit tracker app
+                ==============================
+                1. Sign in
+                2. Register
+
+                Type exit or q to quit
+
+                Enter your choice:\s""");
+    }
+
+    private void handleInput() {
         boolean exit = false;
 
         while (!exit) {
@@ -41,18 +58,5 @@ public class StartMenu implements Command {
                 }
             };
         }
-    }
-
-    private void printMenu() {
-        System.out.println("""
-                ==============================
-                      Habit tracker app
-                ==============================
-                1. Sign in
-                2. Register
-
-                Type exit or q to quit
-
-                Enter your choice:\s""");
     }
 }

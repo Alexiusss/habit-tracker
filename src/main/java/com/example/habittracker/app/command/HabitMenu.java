@@ -26,7 +26,10 @@ public class HabitMenu implements Command {
     @Override
     public void execute() {
         printMenu();
+        handleInput();
+    }
 
+    private void handleInput() {
         boolean exit = false;
 
         while (!exit) {
@@ -43,7 +46,7 @@ public class HabitMenu implements Command {
                 }
                 case "3" -> {
                     deleteHabit();
-                    openMenu(invoker, new HabitMenu(commandContext));
+                    openMenu(invoker, this);
                     yield true;
                 }
                 case "4" -> {
