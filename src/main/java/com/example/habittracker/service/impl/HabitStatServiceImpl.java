@@ -7,6 +7,7 @@ import com.example.habittracker.model.Habit;
 import com.example.habittracker.model.HabitStat;
 import com.example.habittracker.repository.HabitRepository;
 import com.example.habittracker.repository.HabitStatRepository;
+import com.example.habittracker.service.HabitStatService;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
@@ -19,51 +20,22 @@ import static com.example.habittracker.util.ValidationUtil.checkNotFoundWithId;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
-/**
- * Service class responsible for managing habit statistics.
- * Handles operations such as marking a habit as completed, deleting habit statistics,
- * calculating streak counts, and evaluating the percentage of successful executions for habits.
- *
- * @author Alexey Boyarinov
- */
 @AllArgsConstructor
-public class HabitStatServiceImpl implements com.example.habittracker.service.HabitStatService {
+public class HabitStatServiceImpl implements HabitStatService {
 
     private final HabitRepository habitRepository;
     private final HabitStatRepository habitStatRepository;
 
-    /**
-     * Marks a habit as completed for the given user.
-     *
-     * @param userId  the ID of the user
-     * @param habitId the ID of the habit
-     * @return {@code true} if the habit was successfully marked as completed, {@code false} otherwise
-     * @throws IllegalArgumentException if the habit was already marked as completed for today
-     */
     @Override
     public boolean markAsCompleted(Integer userId, Integer habitId) {
         return habitStatRepository.save(new HabitStat(userId, habitId)) != null;
     }
 
-    /**
-     * Deletes all habit statistics for a specific user and habit.
-     *
-     * @param userId  the ID of the user
-     * @param habitId the ID of the habit
-     * @throws NotFoundException if no habitStat with the specified ID exists for the user
-     */
     @Override
     public void deleteAllByUserIdAndHabitId(Integer userId, int habitId) {
         checkNotFoundWithId(habitStatRepository.deleteAllByUserIdAndHabitId(userId, habitId), habitId);
     }
 
-    /**
-     * Retrieves the total count of successful habit streaks for a specific user.
-     * A streak is considered successful if the user consistently completes a habit according to its frequency.
-     *
-     * @param userId the ID of the user
-     * @return the total count of successful habit streaks
-     */
     @Override
     public int getCountOfSuccessfulStreaks(Integer userId) {
         List<Habit> habits = habitRepository.getAllByUserId(userId);
@@ -116,13 +88,6 @@ public class HabitStatServiceImpl implements com.example.habittracker.service.Ha
         return counter;
     }
 
-    /**
-     * Retrieves the percentage of successful habit execution over a given period for a specific user.
-     *
-     * @param userId the ID of the user
-     * @param period the time period (in days) for which to calculate the percentage of successful executions
-     * @return a list of {@code HabitStatTo} objects, each containing the habit name and the percentage of successful executions
-     */
     @Override
     public List<HabitStatTo> getPercentOfSuccessfulExecution(Integer userId, Period period) {
         int days = period.getDays();
