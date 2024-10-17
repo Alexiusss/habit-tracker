@@ -4,8 +4,8 @@ import com.example.habittracker.app.UserInputReader;
 import com.example.habittracker.dto.HabitTo;
 import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.model.Habit;
-import com.example.habittracker.service.HabitService;
-import com.example.habittracker.service.HabitStatService;
+import com.example.habittracker.service.impl.HabitServiceImpl;
+import com.example.habittracker.service.impl.HabitStatServiceImpl;
 import com.example.habittracker.util.PrintUtil;
 import com.example.habittracker.util.SecurityUtil;
 
@@ -19,8 +19,8 @@ public class HabitListMenu implements Command {
     private final UserInputReader userInputReader;
     private final SecurityUtil securityUtil;
     private final Invoker invoker;
-    private final HabitService habitService;
-    private final HabitStatService habitStatService;
+    private final HabitServiceImpl habitService;
+    private final HabitStatServiceImpl habitStatService;
     private final CommandContext commandContext;
 
     public HabitListMenu(CommandContext commandContext) {

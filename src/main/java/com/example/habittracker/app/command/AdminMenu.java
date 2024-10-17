@@ -1,20 +1,18 @@
 package com.example.habittracker.app.command;
 
 import com.example.habittracker.app.UserInputReader;
-import com.example.habittracker.dto.UserResponseTo;
 import com.example.habittracker.exception.NotFoundException;
-import com.example.habittracker.service.HabitService;
-import com.example.habittracker.service.IUserService;
+import com.example.habittracker.service.impl.HabitServiceImpl;
+import com.example.habittracker.service.UserService;
 import com.example.habittracker.util.PrintUtil;
-import com.example.habittracker.util.SecurityUtil;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
 
 public class AdminMenu implements Command {
     private final UserInputReader userInputReader;
     private final Invoker invoker;
-    private final IUserService userService;
-    private final HabitService habitService;
+    private final UserService userService;
+    private final HabitServiceImpl habitService;
     private final CommandContext commandContext;
 
     public AdminMenu(CommandContext commandContext) {

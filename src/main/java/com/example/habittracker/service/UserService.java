@@ -1,128 +1,68 @@
 package com.example.habittracker.service;
 
-import java.util.List;
-
-import com.example.habittracker.exception.NotFoundException;
-import com.example.habittracker.util.UserUtil;
-import lombok.AllArgsConstructor;
 import com.example.habittracker.dto.UserRequestTo;
 import com.example.habittracker.dto.UserResponseTo;
-import com.example.habittracker.exception.DuplicateEmailException;
-import com.example.habittracker.model.User;
-import com.example.habittracker.repository.UserRepository;
 
-import static com.example.habittracker.util.UserUtil.*;
-import static com.example.habittracker.util.ValidationUtil.checkNotFoundWithId;
-import static com.example.habittracker.util.ValidationUtil.assertNotNull;
-import static com.example.habittracker.util.ValidationUtil.checkNotFound;
+import java.util.List;
 
 /**
- * Service implementation for managing users.
+ * Service interface for managing users.
  * Provides CRUD methods.
  *
  * @author Alexey Boyarinov
  */
-@AllArgsConstructor
-public class UserService implements IUserService {
-
-    private final UserRepository repository;
+public interface UserService {
 
     /**
      * Retrieves a user by its ID.
      *
-     * @param id the user ID to retrieve
-     * @return the {@code UserResponseTo} representing the found user
-     * @throws NotFoundException if the user with the specified ID does not exist
+     * @param id the user ID
+     * @return the {@code UserResponseTo} representing the user
      */
-    @Override
-    public UserResponseTo get(int id) {
-        User user = checkNotFoundWithId(repository.get(id), id);
-        return asTo(user);
-    }
+    UserResponseTo get(int id);
 
     /**
-     * Retrieves a user by email.
+     * Retrieves a user by its email.
      *
      * @param email the user's email
-     * @return the {@code UserResponseTo} representing the found user
-     * @throws NotFoundException if no user is found with the specified email
+     * @return the {@code UserResponseTo} representing the user
      */
-    @Override
-    public UserResponseTo getByEmail(String email) {
-        User user = checkNotFound(repository.getByEmail(email), email);
-        return asTo(user);
-    }
-
+    UserResponseTo getByEmail(String email);
 
     /**
      * Retrieves all users.
      *
      * @return a list of {@code UserResponseTo} objects representing all users
      */
-    @Override
-    public List<UserResponseTo> getAll() {
-        return repository.getAll().stream()
-                .map(UserUtil::asTo)
-                .toList();
-    }
+    List<UserResponseTo> getAll();
 
     /**
-     * Creates a new user from the given {@code UserRequestTo}.
-     * Validates the input and checks if the email is already used by another user.
+     * Creates a new user from a {@code UserRequestTo}.
      *
-     * @param userTO the {@code UserRequestTo} containing user details
+     * @param user the {@code UserRequestTo} containing user details
      * @return the {@code UserResponseTo} representing the created user
-     * @throws DuplicateEmailException if a user with the specified email already exists
      */
-    @Override
-    public UserResponseTo create(UserRequestTo userTO) {
-        assertNotNull(userTO, "user must not be null");
-        if (repository.getByEmail(userTO.email()) != null) {
-            throw new DuplicateEmailException("User with email " + userTO.email() + " already exists");
-        }
-        User user = createNewFromTo(userTO);
-        User savedUser = repository.save(user);
-        return asTo(savedUser);
-    }
+    UserResponseTo create(UserRequestTo user);
 
     /**
-     * Updates an existing user with the given details.
-     * The user is retrieved by ID, and then updated with the data in {@code UserRequestTo}.
+     * Updates an existing user with the details from a {@code UserRequestTo}.
      *
-     * @param userTo the {@code UserRequestTo} containing updated user details
-     * @throws NotFoundException if the user with the specified ID is not found
+     * @param user the {@code UserRequestTo} containing updated user details
      */
-    @Override
-    public void update(UserRequestTo userTo) {
-        assertNotNull(userTo, "user must not be null");
-        User user = repository.get(userTo.id());
-        User updateUser = updateFromTo(user, userTo);
-        repository.save(updateUser);
-    }
+    void update(UserRequestTo user);
 
     /**
      * Deletes a user by its ID.
-     * Throws a {@code NotFoundException} if the user is not found.
      *
-     * @param id the user ID to delete
-     * @throws NotFoundException if the user with the specified ID is not found
+     * @param id the user ID
      */
-    @Override
-    public void delete(int id) {
-        checkNotFoundWithId(repository.delete(id), id);
-    }
+    void delete(int id);
 
     /**
-     * Activate or block a user account by setting its active status.
+     * Activate or block a user account.
      *
-     * @param id the user ID to modify
-     * @param enabled {@code true} to activate, {@code false} to block
-     * @throws NotFoundException if the user with the specified ID is not found
+     * @param userId the user ID
+     * @param enabled {@code true} to enable the user, {@code false} to disable
      */
-    @Override
-    public void enable(int id, boolean enabled) {
-        User user = repository.get(id);
-        user.setActive(false);
-        repository.save(user);
-    }
+    void enable(int userId, boolean enabled);
 }

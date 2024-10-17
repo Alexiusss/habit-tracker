@@ -5,6 +5,7 @@ import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.model.HabitStat;
 import com.example.habittracker.repository.HabitRepository;
 import com.example.habittracker.repository.HabitStatRepository;
+import com.example.habittracker.service.impl.HabitStatServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +33,7 @@ public class HabitStatServiceTest {
     HabitStatRepository habitStatRepository;
 
     @InjectMocks
-    HabitStatService service;
+    HabitStatServiceImpl service;
 
     @Test
     void markAsCompleted() {

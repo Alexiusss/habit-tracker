@@ -2,7 +2,7 @@ package com.example.habittracker.app.command;
 
 import com.example.habittracker.app.UserInputReader;
 import com.example.habittracker.exception.NotFoundException;
-import com.example.habittracker.service.HabitStatService;
+import com.example.habittracker.service.impl.HabitStatServiceImpl;
 import com.example.habittracker.util.SecurityUtil;
 
 import java.time.Period;
@@ -13,7 +13,7 @@ public class StatisticsAndAnalyticsMenu implements Command {
     private final UserInputReader userInputReader;
     private final SecurityUtil securityUtil;
     private final Invoker invoker;
-    private final HabitStatService habitStatService;
+    private final HabitStatServiceImpl habitStatService;
     private final CommandContext commandContext;
 
     public StatisticsAndAnalyticsMenu(CommandContext commandContext) {

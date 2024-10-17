@@ -4,11 +4,11 @@ import com.example.habittracker.dto.HabitTo;
 import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.model.Habit;
 import com.example.habittracker.repository.HabitRepository;
+import com.example.habittracker.service.impl.HabitServiceImpl;
 import com.example.habittracker.util.HabitTestData;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -27,7 +27,7 @@ public class HabitServiceTest {
     private HabitRepository habitRepository;
 
     @InjectMocks
-    private HabitService habitService;
+    private HabitServiceImpl habitService;
 
     @Test
     void get() {

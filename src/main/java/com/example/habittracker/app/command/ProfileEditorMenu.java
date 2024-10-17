@@ -6,7 +6,7 @@ import com.example.habittracker.dto.UserResponseTo;
 import com.example.habittracker.exception.DuplicateEmailException;
 import com.example.habittracker.exception.EmailNotValidException;
 import com.example.habittracker.exception.PasswordNotValidException;
-import com.example.habittracker.service.IUserService;
+import com.example.habittracker.service.UserService;
 import com.example.habittracker.util.SecurityUtil;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
@@ -14,7 +14,7 @@ import static com.example.habittracker.util.ConsoleUtil.openMenu;
 public class ProfileEditorMenu implements Command {
     private final UserInputReader userInputReader;
     private final SecurityUtil securityUtil;
-    private final IUserService userService;
+    private final UserService userService;
     private final Invoker invoker;
 
     public ProfileEditorMenu(CommandContext commandContext) {

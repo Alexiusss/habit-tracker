@@ -2,7 +2,7 @@ package com.example.habittracker.app.command;
 
 import com.example.habittracker.app.UserInputReader;
 import com.example.habittracker.dto.HabitTo;
-import com.example.habittracker.service.HabitService;
+import com.example.habittracker.service.impl.HabitServiceImpl;
 import com.example.habittracker.util.SecurityUtil;
 
 import java.time.Period;
@@ -14,7 +14,7 @@ public class HabitEditorMenu implements Command {
     private final UserInputReader userInputReader;
     private final SecurityUtil securityUtil;
     private final Invoker invoker;
-    private final HabitService habitService;
+    private final HabitServiceImpl habitService;
     private final CommandContext commandContext;
 
     public HabitEditorMenu(Integer habitId, CommandContext commandContext) {

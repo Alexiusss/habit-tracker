@@ -4,6 +4,7 @@ import com.example.habittracker.dto.UserResponseTo;
 import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.model.User;
 import com.example.habittracker.repository.UserRepository;
+import com.example.habittracker.service.impl.UserServiceImpl;
 import com.example.habittracker.util.UserTestData;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ public class UserServiceTest {
     private UserRepository userRepository;
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Test
     void get() {

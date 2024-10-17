@@ -7,7 +7,7 @@ import com.example.habittracker.exception.PasswordNotValidException;
 import com.example.habittracker.model.Role;
 import com.example.habittracker.model.User;
 import com.example.habittracker.repository.UserRepository;
-import com.example.habittracker.service.IUserService;
+import com.example.habittracker.service.UserService;
 
 import java.util.Set;
 
@@ -25,7 +25,7 @@ public class SecurityUtil {
     private User currentUser;
 
     private final UserRepository userRepository;
-    private final IUserService userService;
+    private final UserService userService;
 
     /**
      * Constructs the SecurityUtil with a provided UserRepository and IUserService.
@@ -34,7 +34,7 @@ public class SecurityUtil {
      * @param userRepository the UserRepository used for accessing user data
      * @param userService    the IUserService for handling user-related operations
      */
-    public SecurityUtil(UserRepository userRepository, IUserService userService) {
+    public SecurityUtil(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
         this.userService = userService;
         userRepository.save(new User("admin@gmail.com", "admin777", true, Set.of(Role.ADMIN, Role.USER)));
