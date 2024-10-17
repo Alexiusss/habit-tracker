@@ -1,4 +1,4 @@
-package com.example.habittracker.service;
+package com.example.habittracker.util;
 
 import com.example.habittracker.model.HabitStat;
 import lombok.experimental.UtilityClass;
