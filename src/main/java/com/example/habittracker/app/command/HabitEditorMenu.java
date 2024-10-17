@@ -8,6 +8,7 @@ import com.example.habittracker.util.SecurityUtil;
 import java.time.Period;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printMenuHeader;
 
 public class HabitEditorMenu implements Command {
     private final Integer habitId;
@@ -33,11 +34,7 @@ public class HabitEditorMenu implements Command {
     }
 
     private void printMenu() {
-        System.out.print("""
-                ==================================
-                            Habit editor
-                ==================================
-                """);
+        printMenuHeader("Habit editor");
         if (habitId != null) {
             HabitTo habit = habitService.get(habitId, securityUtil.getCurrentUserProfile().id());
             System.out.println("Name: " + habit.name());

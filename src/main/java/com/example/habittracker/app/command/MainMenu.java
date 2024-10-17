@@ -4,6 +4,7 @@ import com.example.habittracker.app.UserInputReader;
 import com.example.habittracker.util.SecurityUtil;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printMainMenu;
 
 public class MainMenu implements Command {
     private final UserInputReader userInputReader;
@@ -20,29 +21,8 @@ public class MainMenu implements Command {
 
     @Override
     public void execute() {
-        printMenu();
+        printMainMenu(securityUtil.isAdmin());
         handleInput();
-    }
-
-    private void printMenu() {
-        System.out.print("""
-                ==========================
-                        Main menu
-                ==========================
-                1. Habits
-                2. Profile
-                """);
-        if (securityUtil.isAdmin()) {
-            System.out.println("""
-                    3. Admin panel
-                    """);
-        }
-        System.out.println("""                
-                Type exit or q to quit
-                                 
-                Enter your choice:\s
-                """);
-
     }
 
     private void handleInput() {

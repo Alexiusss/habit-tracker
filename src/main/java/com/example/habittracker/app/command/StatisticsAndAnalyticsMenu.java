@@ -8,6 +8,7 @@ import com.example.habittracker.util.SecurityUtil;
 import java.time.Period;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printStatisticsAndAnalyticsMenu;
 
 public class StatisticsAndAnalyticsMenu implements Command {
     private final UserInputReader userInputReader;
@@ -26,21 +27,8 @@ public class StatisticsAndAnalyticsMenu implements Command {
 
     @Override
     public void execute() {
-        printMenu();
+        printStatisticsAndAnalyticsMenu();
         handleInput();
-    }
-
-    void printMenu() {
-        System.out.print("""
-                 ==============================
-                    Statistics and analytics
-                 ==============================
-                 1. Get count of current series of execution(streak)
-                 2. Get success statistics for period
-                 3. Back to main menu
-                 
-                Enter your choice:
-                \s""");
     }
 
     void handleInput() {

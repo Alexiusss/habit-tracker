@@ -7,6 +7,7 @@ import com.example.habittracker.exception.PasswordNotValidException;
 import com.example.habittracker.util.SecurityUtil;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printMenuHeader;
 
 public class LoginMenu implements Command {
 
@@ -24,14 +25,8 @@ public class LoginMenu implements Command {
 
     @Override
     public void execute() {
-        printHeader();
+        printMenuHeader("Login menu");
         handleInput();
-    }
-
-    private void printHeader() {
-        System.out.println("=====================");
-        System.out.println("     Login menu      ");
-        System.out.println("=====================");
     }
 
     private void handleInput() {

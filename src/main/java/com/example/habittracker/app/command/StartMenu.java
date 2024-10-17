@@ -4,6 +4,7 @@ import com.example.habittracker.app.UserInputReader;
 import lombok.AllArgsConstructor;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printStartMenu;
 
 @AllArgsConstructor
 public class StartMenu implements Command {
@@ -20,21 +21,8 @@ public class StartMenu implements Command {
 
     @Override
     public void execute() {
-        printMenu();
+        printStartMenu();
         handleInput();
-    }
-
-    private void printMenu() {
-        System.out.println("""
-                ==============================
-                      Habit tracker app
-                ==============================
-                1. Sign in
-                2. Register
-
-                Type exit or q to quit
-
-                Enter your choice:\s""");
     }
 
     private void handleInput() {

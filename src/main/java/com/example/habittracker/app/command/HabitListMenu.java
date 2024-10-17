@@ -6,7 +6,6 @@ import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.model.Habit;
 import com.example.habittracker.service.impl.HabitServiceImpl;
 import com.example.habittracker.service.impl.HabitStatServiceImpl;
-import com.example.habittracker.util.PrintUtil;
 import com.example.habittracker.util.SecurityUtil;
 
 import java.time.LocalDate;
@@ -14,6 +13,9 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printHabitListMenuSelect;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printMenuHeader;
+import static com.example.habittracker.util.print.TablePrinterUtil.TablePrinter.printHabitTable;
 
 public class HabitListMenu implements Command {
     private final UserInputReader userInputReader;
@@ -38,21 +40,14 @@ public class HabitListMenu implements Command {
     }
 
     private void printMenu(Predicate<Habit> predicate) {
-        System.out.print("""
-                         Habits
-                """);
+        printMenuHeader("Habits");
         List<HabitTo> habits = habitService.getAllByUserId(securityUtil.getCurrentUserProfile().id(), predicate);
-        PrintUtil.printHabitTable(habits);
+        printHabitTable(habits);
         handleInput();
     }
 
     private void handleInput() {
-        System.out.println("""
-                1. Set filter
-                2. Mark habit performed
-                3. Return to habit menu
-
-                Enter your choice:\s""");
+        printHabitListMenuSelect();
 
         boolean exit = false;
         while (!exit) {

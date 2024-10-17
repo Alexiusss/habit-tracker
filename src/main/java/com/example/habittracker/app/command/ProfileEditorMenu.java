@@ -10,6 +10,7 @@ import com.example.habittracker.service.UserService;
 import com.example.habittracker.util.SecurityUtil;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printProfileEditorMenu;
 
 public class ProfileEditorMenu implements Command {
     private final UserInputReader userInputReader;
@@ -27,17 +28,12 @@ public class ProfileEditorMenu implements Command {
     @Override
     public void execute() {
         UserResponseTo profile = securityUtil.getCurrentUserProfile();
-        printEditor(profile);
+        printProfileEditorMenu(profile);
         handleProfileUpdate(profile);
     }
 
     private void printEditor(UserResponseTo profile) {
-        System.out.println("======================");
-        System.out.println("    Profile editor    ");
-        System.out.println("======================");
-        System.out.println("Email: " + profile.email());
-        System.out.println("Name: " + profile.name());
-        System.out.println("\s\s\s");
+
     }
 
     private void handleProfileUpdate(UserResponseTo profile) {

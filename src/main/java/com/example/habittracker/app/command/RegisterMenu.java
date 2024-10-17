@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printMenuHeader;
 
 @AllArgsConstructor
 public class RegisterMenu implements Command {
@@ -32,14 +33,8 @@ public class RegisterMenu implements Command {
 
     @Override
     public void execute() {
-        printHeader();
+        printMenuHeader("Register menu");
         handleInput();
-    }
-
-    private void printHeader() {
-        System.out.println("=====================");
-        System.out.println("    Register menu    ");
-        System.out.println("=====================");
     }
 
     private void handleInput() {

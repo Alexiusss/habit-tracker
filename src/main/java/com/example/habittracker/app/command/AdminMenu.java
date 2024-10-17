@@ -2,11 +2,13 @@ package com.example.habittracker.app.command;
 
 import com.example.habittracker.app.UserInputReader;
 import com.example.habittracker.exception.NotFoundException;
-import com.example.habittracker.service.impl.HabitServiceImpl;
 import com.example.habittracker.service.UserService;
-import com.example.habittracker.util.PrintUtil;
+import com.example.habittracker.service.impl.HabitServiceImpl;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printAdminMenu;
+import static com.example.habittracker.util.print.TablePrinterUtil.TablePrinter.printHabitTable;
+import static com.example.habittracker.util.print.TablePrinterUtil.TablePrinter.printUserTable;
 
 public class AdminMenu implements Command {
     private final UserInputReader userInputReader;
@@ -25,22 +27,8 @@ public class AdminMenu implements Command {
 
     @Override
     public void execute() {
-        printMenu();
+        printAdminMenu();
         handleInput();
-    }
-
-    private void printMenu() {
-        System.out.println("""
-                ==============================
-                        Admin menu
-                 ==============================
-                1. Get all users
-                2. Get all habits
-                3. Delete user
-                4. Block user
-                5. Return to main menu
-
-                Enter your choice:\s""");
     }
 
     void handleInput() {
@@ -50,12 +38,12 @@ public class AdminMenu implements Command {
             String choice = userInputReader.getUserChoice();
             exit = switch (choice) {
                 case "1" -> {
-                    PrintUtil.printUserTable(userService.getAll());
+                    printUserTable(userService.getAll());
                     openMenu(invoker, this);
                     yield true;
                 }
                 case "2" -> {
-                    PrintUtil.printHabitTable(habitService.getAll());
+                    printHabitTable(habitService.getAll());
                     openMenu(invoker, this);
                     yield true;
                 }

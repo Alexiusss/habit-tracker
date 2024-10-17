@@ -7,6 +7,8 @@ import com.example.habittracker.service.impl.HabitServiceImpl;
 import com.example.habittracker.util.SecurityUtil;
 
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
+import static com.example.habittracker.util.print.MenuPrinterUtil.printHabitMenu;
+
 
 public class HabitMenu implements Command {
     private final UserInputReader userInputReader;
@@ -25,7 +27,7 @@ public class HabitMenu implements Command {
 
     @Override
     public void execute() {
-        printMenu();
+        printHabitMenu();
         handleInput();
     }
 
@@ -67,21 +69,6 @@ public class HabitMenu implements Command {
                 }
             };
         }
-    }
-
-    private void printMenu() {
-        System.out.print("""
-                        Habits menu
-                """);
-        System.out.println("""
-                1. Create
-                2. Edit
-                3. Delete
-                4. Get filtered list
-                5. Statistics and analytics
-                6. Return to main menu
-
-                Enter your choice:\s""");
     }
 
     private int getHabitIdFromInput(String message) {
