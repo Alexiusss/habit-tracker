@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        logicalFilePath="db/changelog.xml">
+    <changeSet id="create-habit-table" author="boyarinov-alexey">
+        <createTable schemaName="entity" tableName="habit">
+            <column name="id" type="INT" defaultValue="nextval('entity.global_seq')">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValue="now()"/>
+            <column name="modified_at" type="TIMESTAMP"/>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="is_active" type="BOOL" defaultValue="TRUE"/>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"
+                             referencedTableSchemaName="entity"
+                             foreignKeyName="user_id"
+                             referencedTableName="users"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create-habit_name_for_user_unique_idx" author="boyarinov-alexey">
+        <addUniqueConstraint columnNames="user_id, name"
+                             schemaName="entity"
+                             tableName="habit"
+                             constraintName="habit_name_for_user_unique_idx"/>
+    </changeSet>
+</databaseChangeLog>

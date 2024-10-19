@@ -16,8 +16,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import static com.example.habittracker.util.UserTestData.UPDATED_USER;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -73,9 +75,9 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("Create a new user, expected success")
-    void create() {
+    void create() throws SQLException {
         Mockito.when(userRepository.save(any(User.class))).thenReturn(UserTestData.ADMIN);
-        UserResponseTo savedUser = userService.create(UserTestData.NEW_USER);
+        UserResponseTo savedUser = userService.create(UserTestData.NEW_USER_TO);
 
         Assertions.assertThat(savedUser)
                 .usingRecursiveComparison()
@@ -86,22 +88,20 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("Update an existing user, expected success")
-    void update() {
-        Mockito.when(userRepository.get(UserTestData.USER.getId())).thenReturn(UserTestData.USER);
-        User updatedUser = UserTestData.USER;
-        updatedUser.setName("Updated name");
-        Mockito.when(userRepository.save(any(User.class))).thenReturn(updatedUser);
+    void update() throws SQLException {
+        Mockito.when(userRepository.get(UserTestData.USER.getId())).thenReturn(UPDATED_USER);
+        Mockito.when(userRepository.save(any(User.class))).thenReturn(UPDATED_USER);
 
-        userService.update(UserTestData.UPDATED_USER);
+        userService.update(UserTestData.UPDATED_USER_TO);
 
-        Mockito.verify(userRepository).save(updatedUser);
+        Mockito.verify(userRepository).save(UPDATED_USER);
         Mockito.verify(userRepository).save(ArgumentMatchers.argThat(argument -> argument.getName().equals("Updated name")));
     }
 
 
     @Test
     @DisplayName("Delete user by ID, expected success")
-    void delete() {
+    void delete() throws SQLException {
         Mockito.when(userRepository.delete(UserTestData.ADMIN_ID)).thenReturn(true);
         userService.delete(UserTestData.ADMIN_ID);
 
@@ -110,7 +110,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("Delete user by ID, throws NotFoundException")
-    void deleteNotFound() {
+    void deleteNotFound() throws SQLException {
         Mockito.when(userRepository.delete(UserTestData.NOT_FOUND_ID)).thenReturn(false);
         assertThrowsExactly(NotFoundException.class, () -> userService.delete(UserTestData.NOT_FOUND_ID));
     }

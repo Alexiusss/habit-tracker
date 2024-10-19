@@ -3,6 +3,8 @@ package com.example.habittracker.app.command;
 import com.example.habittracker.app.UserInputReader;
 import com.example.habittracker.util.SecurityUtil;
 
+import java.sql.SQLException;
+
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
 import static com.example.habittracker.util.print.MenuPrinterUtil.printProfileMenuEditor;
 
@@ -25,7 +27,7 @@ public class ProfileMenu implements Command {
         handleInput();
     }
 
-    private void handleInput() {
+    private void handleInput()  {
         boolean exit = false;
 
         while (!exit) {
@@ -52,8 +54,12 @@ public class ProfileMenu implements Command {
         }
     }
 
-    public void deleteAccount() {
-        securityUtil.deleteAccount();
+    public void deleteAccount()  {
+        try {
+            securityUtil.deleteAccount();
+        } catch (SQLException e) {
+            throw new RuntimeException("Exception while deleting user profile: \n" + e.getMessage());
+        }
         System.out.println("Account successfully deleted");
     }
 }

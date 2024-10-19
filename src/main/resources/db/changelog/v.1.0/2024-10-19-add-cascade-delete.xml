@@ -1,0 +1,57 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        logicalFilePath="db/changelog.xml">
+    <changeSet id="drop-foreign-key-user-role-table" author="boyarinov-alexey">
+        <dropAllForeignKeyConstraints baseTableSchemaName="entity" baseTableName="user_role"/>
+    </changeSet>
+    <changeSet id="add-cascade-delete-user-role-table" author="boyarinov-alexey">
+        <addForeignKeyConstraint baseTableSchemaName="entity"
+                                 baseTableName="user_role"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_user_role_user"
+                                 referencedTableSchemaName="entity"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="drop-foreign-key-habit-table" author="boyarinov-alexey">
+        <dropAllForeignKeyConstraints baseTableSchemaName="entity" baseTableName="habit"/>
+    </changeSet>
+    <changeSet id="add-cascade-delete-habit-table" author="boyarinov-alexey">
+        <addForeignKeyConstraint baseTableSchemaName="entity"
+                                 baseTableName="habit"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_habit_user"
+                                 referencedTableSchemaName="entity"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="drop-foreign-key-habit_stat-table" author="boyarinov-alexey">
+        <dropAllForeignKeyConstraints baseTableSchemaName="entity" baseTableName="habit_stat"/>
+    </changeSet>
+    <changeSet id="add-cascade-delete-habit_stat-table" author="boyarinov-alexey">
+        <addForeignKeyConstraint baseTableSchemaName="entity"
+                                 baseTableName="habit_stat"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_habit_stat_user"
+                                 referencedTableSchemaName="entity"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableSchemaName="entity"
+                                 baseTableName="habit_stat"
+                                 baseColumnNames="habit_id"
+                                 constraintName="fk_habit_stat_habit"
+                                 referencedTableSchemaName="entity"
+                                 referencedTableName="habit"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

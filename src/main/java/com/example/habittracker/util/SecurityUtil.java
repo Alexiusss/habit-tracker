@@ -9,6 +9,7 @@ import com.example.habittracker.model.User;
 import com.example.habittracker.repository.UserRepository;
 import com.example.habittracker.service.UserService;
 
+import java.sql.SQLException;
 import java.util.Set;
 
 import static com.example.habittracker.util.UserUtil.asTo;
@@ -34,10 +35,10 @@ public class SecurityUtil {
      * @param userRepository the UserRepository used for accessing user data
      * @param userService    the IUserService for handling user-related operations
      */
-    public SecurityUtil(UserRepository userRepository, UserService userService) {
+    public SecurityUtil (UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
         this.userService = userService;
-        userRepository.save(new User("admin@gmail.com", "admin777", true, Set.of(Role.ADMIN, Role.USER)));
+//        userRepository.save(new User("admin@gmail.com", "admin777", true, Set.of(Role.ADMIN, Role.USER)));
     }
 
     /**
@@ -64,7 +65,7 @@ public class SecurityUtil {
     /**
      * Deletes the currently logged-in user's account.
      */
-    public void deleteAccount() {
+    public void deleteAccount() throws SQLException {
         userService.delete(currentUser.getId());
         currentUser = null;
     }

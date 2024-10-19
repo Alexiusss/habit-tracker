@@ -10,6 +10,8 @@ import com.example.habittracker.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.sql.SQLException;
+
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
 import static com.example.habittracker.util.print.MenuPrinterUtil.printMenuHeader;
 
@@ -46,6 +48,8 @@ public class RegisterMenu implements Command {
                 user = userService.create(new UserRequestTo(null, null, email, password));
             } catch (EmailNotValidException | PasswordNotValidException | DuplicateEmailException e) {
                 System.out.println(e.getMessage());
+            } catch (SQLException e) {
+                throw  new RuntimeException(e);
             }
         }
         System.out.println("User successfully registered. Sign in with your email and password.\n\n\n");
