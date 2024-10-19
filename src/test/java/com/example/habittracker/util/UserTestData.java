@@ -41,8 +41,45 @@ public class UserTestData {
             .roles(Set.of(Role.USER))
             .build();
 
+    public static final User NEW_USER = User.builder()
+            .createdAt(LocalDateTime.now())
+            .version(0)
+            .name("New user")
+            .email("new_user@gmail.com")
+            .password("newuser111")
+            .isActive(true)
+            .roles(Set.of(Role.USER))
+            .build();
+    public static final User NEW_USER_WITH_DUPLICATE_EMAIL = User.builder()
+            .createdAt(LocalDateTime.now())
+            .version(0)
+            .email(ADMIN_EMAIL)
+            .password("newuser111")
+            .roles(Set.of(Role.USER))
+            .build();
+
+    public static final User NEW_INVALID_USER = User.builder()
+            .createdAt(LocalDateTime.now())
+            .version(0)
+            .email("newuser111")
+            .password(null)
+            .roles(Set.of(Role.USER))
+            .build();
+
+    public static final User UPDATED_USER = User.builder()
+            .id(USER.getId())
+            .version(USER.getVersion() + 1)
+            .name("Updated name")
+            .email(USER.getEmail())
+            .password(USER.getPassword())
+            .isActive(true)
+            .roles(Set.of(Role.USER))
+            .build();
+
+
     public static final UserResponseTo ADMIN_FROM_DB = new UserResponseTo(ADMIN_ID, ADMIN_NAME, ADMIN_EMAIL, true);
 
-    public static final UserRequestTo NEW_USER = new UserRequestTo(null, ADMIN_NAME, ADMIN_EMAIL, ADMIN_PASSWORD);
-    public static final UserRequestTo UPDATED_USER = new UserRequestTo(USER.getId(), "Updated name", USER.getEmail(), USER.getPassword());
+    public static final UserRequestTo NEW_USER_TO = new UserRequestTo(null, ADMIN_NAME, ADMIN_EMAIL, ADMIN_PASSWORD);
+
+    public static final UserRequestTo UPDATED_USER_TO = new UserRequestTo(USER.getId(), "Updated name", USER.getEmail(), USER.getPassword());
 }
