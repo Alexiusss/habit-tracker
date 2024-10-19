@@ -46,6 +46,10 @@ public class JdbcHabitRepository implements HabitRepository {
                 ps.setString(3, habit.getName());
                 ps.setObject(4, convertPeriodToPGInterval(habit.getFrequency()));
                 ps.setBoolean(5, habit.isActive());
+                ps.setInt(6, habit.getId());
+                ps.executeUpdate();
+                connection.commit();
+                return null;
             }
 
         } catch (SQLException e) {
@@ -56,13 +60,12 @@ public class JdbcHabitRepository implements HabitRepository {
             }
             throw new RuntimeException("Exception occurred while saving to the JDBC habit repository: \n" + e.getMessage());
         }
-        return null;
     }
 
     @Override
     public boolean delete(int id, int userId) {
         Connection connection = getConnection();
-        int deletedCount = 0;
+        int deletedCount;
         try {
             connection.setAutoCommit(false);
             PreparedStatement ps = connection.prepareStatement(DELETE_HABIT_SQL);

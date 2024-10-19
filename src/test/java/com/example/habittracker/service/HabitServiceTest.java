@@ -64,7 +64,7 @@ public class HabitServiceTest {
     @DisplayName("Create a new habit, expected success")
     void create() {
         Mockito.when(habitRepository.save(any(Habit.class), eq(HabitTestData.USER_ID))).thenReturn(HabitTestData.FIRST_HABIT);
-        HabitTo savedHabit = habitService.create(HabitTestData.NEW_HABIT, HabitTestData.USER_ID);
+        HabitTo savedHabit = habitService.create(HabitTestData.NEW_HABIT_TO, HabitTestData.USER_ID);
 
         Assertions.assertThat(savedHabit)
                 .usingRecursiveComparison()

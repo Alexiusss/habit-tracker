@@ -22,6 +22,7 @@ class JdbcHabitStatRepositoryTest extends AbstractJdbcRepositoryTest {
     }
 
     @Test
+    @DisplayName("Mark habit as completed for today, expected success")
     void save() {
         HabitStat saved = repository.save(NEW_HABIT_STAT);
         NEW_HABIT_STAT.setId(saved.getId());
@@ -32,13 +33,14 @@ class JdbcHabitStatRepositoryTest extends AbstractJdbcRepositoryTest {
     }
 
     @Test
+    @DisplayName("Delete all by user ID and habit ID, expected success")
     void deleteAllByUserIdAndHabitId() {
         boolean isDeleted = repository.deleteAllByUserIdAndHabitId(USER.getId(), FIRST_HABIT_ID);
         Assertions.assertThat(isDeleted).isTrue();
     }
 
     @Test
-    @DisplayName("Get all by user ID, expected success")
+    @DisplayName("Get all habit stats by user ID, expected success")
     void getAllByUserId() {
         List<HabitStat> habitStats = repository.getAllByUserId(USER.getId());
 

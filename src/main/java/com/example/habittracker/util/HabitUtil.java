@@ -21,7 +21,7 @@ public class HabitUtil {
 
     public static final String INSERT_HABIT_SQL = "INSERT INTO entity.habit (version, name, frequency, is_active, user_id) VALUES (?, ?, ?, ?, ?)";
     public static final String UPDATE_HABIT_SQL = "UPDATE entity.habit SET modified_at=?, version=?, name=?, frequency=?, is_active=? WHERE id=?";
-    public static final String DELETE_HABIT_SQL = "DELETE entity.habit WHERE habit_id=? AND user_id=?";
+    public static final String DELETE_HABIT_SQL = "DELETE FROM entity.habit WHERE id=? AND user_id=?";
     public static final String SELECT_ALL_HABITS_SQL = "SELECT * FROM entity.habit";
     public static final String SELECT_ALL_HABITS_BY_USER_SQL = "SELECT * FROM entity.habit WHERE user_id=?";
     public static final String SELECT_HABIT_BY_ID_AND_USER_SQL = "SELECT * FROM entity.habit WHERE id=? AND user_id=?";
