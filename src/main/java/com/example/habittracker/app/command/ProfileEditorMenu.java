@@ -9,6 +9,8 @@ import com.example.habittracker.exception.PasswordNotValidException;
 import com.example.habittracker.service.UserService;
 import com.example.habittracker.util.SecurityUtil;
 
+import java.sql.SQLException;
+
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
 import static com.example.habittracker.util.print.MenuPrinterUtil.printProfileEditorMenu;
 
@@ -49,6 +51,8 @@ public class ProfileEditorMenu implements Command {
             } catch (EmailNotValidException | PasswordNotValidException | DuplicateEmailException e) {
                 System.out.println(e.getMessage());
                 System.out.println("Please try again");
+            } catch (SQLException e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         openMenu(invoker, this);

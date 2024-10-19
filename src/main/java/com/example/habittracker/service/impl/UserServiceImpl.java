@@ -1,5 +1,6 @@
 package com.example.habittracker.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.example.habittracker.exception.NotFoundException;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseTo create(UserRequestTo userTO) {
+    public UserResponseTo create(UserRequestTo userTO) throws SQLException {
         assertNotNull(userTO, "user must not be null");
         if (repository.getByEmail(userTO.email()) != null) {
             throw new DuplicateEmailException("User with email " + userTO.email() + " already exists");
@@ -53,7 +54,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(UserRequestTo userTo) {
+    public void update(UserRequestTo userTo) throws SQLException {
         assertNotNull(userTo, "user must not be null");
         User user = repository.get(userTo.id());
         User updateUser = updateFromTo(user, userTo);
@@ -61,12 +62,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id) throws SQLException {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
-    public void enable(int id, boolean enabled) {
+    public void enable(int id, boolean enabled) throws SQLException {
         User user = repository.get(id);
         user.setActive(false);
         repository.save(user);

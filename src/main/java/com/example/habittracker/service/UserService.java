@@ -3,6 +3,7 @@ package com.example.habittracker.service;
 import com.example.habittracker.dto.UserRequestTo;
 import com.example.habittracker.dto.UserResponseTo;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -42,21 +43,21 @@ public interface UserService {
      * @param user the {@code UserRequestTo} containing user details
      * @return the {@code UserResponseTo} representing the created user
      */
-    UserResponseTo create(UserRequestTo user);
+    UserResponseTo create(UserRequestTo user) throws SQLException;
 
     /**
      * Updates an existing user with the details from a {@code UserRequestTo}.
      *
      * @param user the {@code UserRequestTo} containing updated user details
      */
-    void update(UserRequestTo user);
+    void update(UserRequestTo user) throws SQLException;
 
     /**
      * Deletes a user by its ID.
      *
      * @param id the user ID
      */
-    void delete(int id);
+    void delete(int id) throws SQLException;
 
     /**
      * Activate or block a user account.
@@ -64,5 +65,5 @@ public interface UserService {
      * @param userId the user ID
      * @param enabled {@code true} to enable the user, {@code false} to disable
      */
-    void enable(int userId, boolean enabled);
+    void enable(int userId, boolean enabled) throws SQLException;
 }

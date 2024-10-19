@@ -5,6 +5,8 @@ import com.example.habittracker.exception.NotFoundException;
 import com.example.habittracker.service.UserService;
 import com.example.habittracker.service.impl.HabitServiceImpl;
 
+import java.sql.SQLException;
+
 import static com.example.habittracker.util.ConsoleUtil.openMenu;
 import static com.example.habittracker.util.print.MenuPrinterUtil.printAdminMenu;
 import static com.example.habittracker.util.print.TablePrinterUtil.TablePrinter.printHabitTable;
@@ -71,14 +73,22 @@ public class AdminMenu implements Command {
 
     private void deleteUser() {
         Integer userId = getIdFromUserInput();
-        userService.delete(userId);
+        try {
+            userService.delete(userId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("User with " + userId + " successfully deleted");
         System.out.println("\s\s\s");
     }
 
     private void blockUser() {
         Integer userId = getIdFromUserInput();
-        userService.enable(userId, false);
+        try {
+            userService.enable(userId, false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("User with " + userId + " successfully blocked");
         System.out.println("\s\s\s");
     }

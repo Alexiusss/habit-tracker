@@ -2,6 +2,7 @@ package com.example.habittracker.repository;
 
 import com.example.habittracker.model.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public interface UserRepository {
      * @param user the user to save or update
      * @return the saved or updated user
      */
-    User save(User user);
+    User save(User user) throws SQLException;
 
     /**
      * Deletes a user with the specified ID from the repository.
@@ -28,7 +29,7 @@ public interface UserRepository {
      * @param id the ID of the user to delete
      * @return {@code true} if the user was successfully deleted, {@code false} otherwise
      */
-    boolean delete(int id);
+    boolean delete(int id) throws SQLException;
 
     /**
      * Retrieves a user with the specified ID from the repository.

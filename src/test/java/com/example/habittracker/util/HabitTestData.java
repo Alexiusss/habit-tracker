@@ -11,10 +11,11 @@ import java.time.Period;
 public class HabitTestData {
     public static final Integer NOT_FOUND_ID = 1000;
 
-    public static final Integer FIRST_HABIT_ID = 10;
+    public static final Integer FIRST_HABIT_ID = 11;
+    public static final Integer SECOND_HABIT_ID = 12;
     public static final String FIRST_HABIT_NAME = "Admin";
     public static final Period FIRST_HABIT_FREQUENCY = Period.ofDays(1);
-    public static final Integer USER_ID = 11;
+    public static final Integer USER_ID = 2;
 
     public static final Habit FIRST_HABIT = Habit.builder()
             .id(FIRST_HABIT_ID)

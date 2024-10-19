@@ -6,6 +6,7 @@ import com.example.habittracker.repository.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static com.example.habittracker.util.UserTestData.*;
@@ -23,7 +24,7 @@ public class JdbcUserRepositoryTest extends AbstractJdbcRepositoryTest {
 
     @Test
     @DisplayName("Create a new user, expected success")
-    void create() {
+    void create() throws SQLException {
         User newUser = NEW_USER;
         User saved = userRepository.save(newUser);
         newUser.setId(saved.getId());
@@ -53,7 +54,7 @@ public class JdbcUserRepositoryTest extends AbstractJdbcRepositoryTest {
     @Test
     @Order(2)
     @DisplayName("Update an existing user, expected success")
-    void update() {
+    void update() throws SQLException {
         Assertions.assertThat(userRepository.save(UPDATED_USER)).isNull();
 
         User userFromDB = userRepository.get(USER.getId());
@@ -65,7 +66,7 @@ public class JdbcUserRepositoryTest extends AbstractJdbcRepositoryTest {
 
     @Test
     @DisplayName("Delete user by ID, expected success")
-    void delete() {
+    void delete() throws SQLException {
         boolean isDeleted = userRepository.delete(USER.getId());
 
         Assertions.assertThat(isDeleted).isTrue();
@@ -73,7 +74,7 @@ public class JdbcUserRepositoryTest extends AbstractJdbcRepositoryTest {
 
     @Test
     @DisplayName("Delete user by ID, expected fail")
-    void deleteNotFound() {
+    void deleteNotFound() throws SQLException {
         boolean isDeleted = userRepository.delete(NOT_FOUND_ID);
 
         Assertions.assertThat(isDeleted).isFalse();
@@ -86,7 +87,7 @@ public class JdbcUserRepositoryTest extends AbstractJdbcRepositoryTest {
 
         Assertions.assertThat(user)
                 .usingRecursiveComparison()
-                .ignoringFields("createdAt", "modifiedAt", "roles")
+                .ignoringFields("createdAt", "modifiedAt")
                 .isEqualTo(ADMIN);
     }
 
@@ -105,7 +106,7 @@ public class JdbcUserRepositoryTest extends AbstractJdbcRepositoryTest {
 
         Assertions.assertThat(user)
                 .usingRecursiveComparison()
-                .ignoringFields("createdAt", "modifiedAt", "roles")
+                .ignoringFields("createdAt", "modifiedAt")
                 .isEqualTo(ADMIN);
     }
 
