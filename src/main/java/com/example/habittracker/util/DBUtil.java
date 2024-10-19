@@ -26,7 +26,7 @@ import java.util.Properties;
 @UtilityClass
 public class DBUtil {
 
-    public static final String PROPS_FILE = "application-default.properties";
+    public static final String PROPS_FILE = "postgres-default.properties";
     public static final String ENV_FILE = ".env";
     public static final String LIQUIBASE_SERVICE_SCHEMA_NAME = "service";
     public static final String CREATE_SCHEMA_SQL = "CREATE SCHEMA IF NOT EXISTS ";
@@ -36,7 +36,7 @@ public class DBUtil {
     /**
      * This method loads database configuration properties from two sources:
      * <ul>
-     *     <li>An {@code application-dev.properties} file located in the classpath.</li>
+     *     <li>An {@code postgres-dev.properties} file located in the classpath.</li>
      *     <li>A {@code .env} file located in the root directory.</li>
      * </ul>
      * <p>
