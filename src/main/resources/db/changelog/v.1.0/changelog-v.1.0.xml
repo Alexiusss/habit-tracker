@@ -16,4 +16,5 @@
     <include file="2024-10-19-insert-user_role-data.xml" relativeToChangelogFile="true"/>
     <include file="2024-10-19-insert-habit-data.xml" relativeToChangelogFile="true"/>
     <include file="2024-10-19-insert-habit_stat-data.xml" relativeToChangelogFile="true"/>
+    <include file="2024-10-19-add-frequency-column-habit.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
