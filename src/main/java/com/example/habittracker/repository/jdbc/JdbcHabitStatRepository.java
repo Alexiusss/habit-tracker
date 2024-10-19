@@ -25,11 +25,14 @@ public class JdbcHabitStatRepository implements HabitStatRepository {
             ps.setInt(1, 0);
             ps.setInt(2, habitStat.getUserId());
             ps.setInt(3, habitStat.getHabitId());
+            ps.executeUpdate();
             ResultSet generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
                 int id = generatedKeys.getInt("id");
                 habitStat.setId(id);
             }
+            connection.commit();
+            connection.close();
         } catch (SQLException e) {
             System.out.println("Exception occurs while saving habit " + habitStat + ":\n" + e.getMessage());
         }

@@ -31,7 +31,7 @@ public class HabitStatTestData {
             .build();
 
     public static HabitStat NEW_HABIT_STAT = HabitStat.builder()
-            .createdAt(LocalDateTime.now().minusDays(1))
+            .createdAt(LocalDateTime.now().plusDays(1))
             .version(0)
             .userId(USER_ID)
             .habitId(SECOND_HABIT_ID)

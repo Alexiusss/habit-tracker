@@ -10,7 +10,7 @@ public class UserInputReader {
     Scanner scanner = new Scanner(System.in);
 
     public String getUserChoice() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     public String getUserInput(String string) {
