@@ -14,7 +14,7 @@ public class UserTestData {
     public static final Integer ADMIN_ID = 1;
     public static final String ADMIN_NAME = "Admin";
     public static final String ADMIN_EMAIL = "admin@gmail.com";
-    public static final String ADMIN_PASSWORD = "password";
+    public static final String ADMIN_PASSWORD = "admin777";
     public static final Integer NOT_FOUND_ID = 1000;
 
     public static final User ADMIN = User.builder()
@@ -36,7 +36,7 @@ public class UserTestData {
             .version(0)
             .name("User")
             .email("user@gmail.com")
-            .password("user_password")
+            .password("user555")
             .isActive(true)
             .roles(Set.of(Role.USER))
             .build();

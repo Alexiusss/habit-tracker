@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static com.example.habittracker.util.UserTestData.UPDATED_USER;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -75,7 +76,7 @@ public class UserServiceTest {
     @DisplayName("Create a new user, expected success")
     void create() {
         Mockito.when(userRepository.save(any(User.class))).thenReturn(UserTestData.ADMIN);
-        UserResponseTo savedUser = userService.create(UserTestData.NEW_USER);
+        UserResponseTo savedUser = userService.create(UserTestData.NEW_USER_TO);
 
         Assertions.assertThat(savedUser)
                 .usingRecursiveComparison()
@@ -87,14 +88,12 @@ public class UserServiceTest {
     @Test
     @DisplayName("Update an existing user, expected success")
     void update() {
-        Mockito.when(userRepository.get(UserTestData.USER.getId())).thenReturn(UserTestData.USER);
-        User updatedUser = UserTestData.USER;
-        updatedUser.setName("Updated name");
-        Mockito.when(userRepository.save(any(User.class))).thenReturn(updatedUser);
+        Mockito.when(userRepository.get(UserTestData.USER.getId())).thenReturn(UPDATED_USER);
+        Mockito.when(userRepository.save(any(User.class))).thenReturn(UPDATED_USER);
 
-        userService.update(UserTestData.UPDATED_USER);
+        userService.update(UserTestData.UPDATED_USER_TO);
 
-        Mockito.verify(userRepository).save(updatedUser);
+        Mockito.verify(userRepository).save(UPDATED_USER);
         Mockito.verify(userRepository).save(ArgumentMatchers.argThat(argument -> argument.getName().equals("Updated name")));
     }
 
