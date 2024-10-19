@@ -12,7 +12,6 @@ import static com.example.habittracker.util.HabitTestData.FIRST_HABIT_ID;
 import static com.example.habittracker.util.UserTestData.USER;
 
 @DisplayName("JDBC habit stat repository test")
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class JdbcHabitStatRepositoryTest extends AbstractJdbcRepositoryTest {
 
     HabitStatRepository repository;
@@ -39,7 +38,6 @@ class JdbcHabitStatRepositoryTest extends AbstractJdbcRepositoryTest {
     }
 
     @Test
-    @Order(1)
     @DisplayName("Get all by user ID, expected success")
     void getAllByUserId() {
         List<HabitStat> habitStats = repository.getAllByUserId(USER.getId());
