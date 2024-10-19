@@ -12,4 +12,8 @@
     <include file="2024-10-18-create-habit-table.xml" relativeToChangelogFile="true"/>
     <include file="2024-10-18-create-habit_stat-table.xml" relativeToChangelogFile="true"/>
     <include file="2024-10-19-add-cascade-delete.xml" relativeToChangelogFile="true"/>
+    <include file="2024-10-19-insert-user-data.xml" relativeToChangelogFile="true"/>
+    <include file="2024-10-19-insert-user_role-data.xml" relativeToChangelogFile="true"/>
+    <include file="2024-10-19-insert-habit-data.xml" relativeToChangelogFile="true"/>
+    <include file="2024-10-19-insert-habit_stat-data.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

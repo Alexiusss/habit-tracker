@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        logicalFilePath="db/changelog.xml">
+    <changeSet id="insert-habit-data" author="boyarinov-alexey">
+        <insert schemaName="entity" tableName="habit">
+            <column name="id">11</column>
+            <column name="user_id">2</column>
+            <column name="version">0</column>
+            <column name="name">Habit1</column>
+        </insert>
+        <insert schemaName="entity" tableName="habit">
+            <column name="id">12</column>
+            <column name="user_id">2</column>
+            <column name="version">0</column>
+            <column name="name">Habit2</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

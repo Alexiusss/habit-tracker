@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        logicalFilePath="db/changelog.xml">
+    <changeSet id="insert-user-data" author="boyarinov-alexey">
+        <insert schemaName="entity" tableName="users">
+            <column name="id">1</column>
+            <column name="version">0</column>
+            <column name="name">Admin</column>
+            <column name="email">admin@gmail.com</column>
+            <column name="password">admin777</column>
+        </insert>
+        <insert schemaName="entity" tableName="users">
+            <column name="id">2</column>
+            <column name="version">0</column>
+            <column name="name">User</column>
+            <column name="email">user@gmail.com</column>
+            <column name="password">user555</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
