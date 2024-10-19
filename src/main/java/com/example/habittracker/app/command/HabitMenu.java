@@ -88,7 +88,7 @@ public class HabitMenu implements Command {
     private void deleteHabit() {
         int habitId = getHabitIdFromInput("deleting");
         try {
-            habitService.delete(securityUtil.getCurrentUserProfile().id(), habitId);
+            habitService.delete(habitId, securityUtil.getCurrentUserProfile().id());
             System.out.println("Habit deleted");
         } catch (NullPointerException | NotFoundException e) {
             System.out.println(e.getMessage());

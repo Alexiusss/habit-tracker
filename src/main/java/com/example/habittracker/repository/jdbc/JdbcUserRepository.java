@@ -48,7 +48,8 @@ public class JdbcUserRepository implements UserRepository {
                 ps.setString(3, user.getName());
                 ps.setString(4, user.getEmail());
                 ps.setString(5, user.getPassword());
-                ps.setInt(6, user.getId());
+                ps.setBoolean(6, user.isActive());
+                ps.setInt(7, user.getId());
                 ps.executeUpdate();
                 connection.commit();
                 return null;

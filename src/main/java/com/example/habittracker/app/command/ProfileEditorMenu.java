@@ -19,12 +19,14 @@ public class ProfileEditorMenu implements Command {
     private final SecurityUtil securityUtil;
     private final UserService userService;
     private final Invoker invoker;
+    private final CommandContext commandContext;
 
     public ProfileEditorMenu(CommandContext commandContext) {
         this.userInputReader = commandContext.getUserInputReader();
         this.securityUtil = commandContext.getSecurityUtil();
         this.userService = commandContext.getUserService();
         this.invoker = commandContext.getInvoker();
+        this.commandContext = commandContext;
     }
 
     @Override
@@ -32,10 +34,6 @@ public class ProfileEditorMenu implements Command {
         UserResponseTo profile = securityUtil.getCurrentUserProfile();
         printProfileEditorMenu(profile);
         handleProfileUpdate(profile);
-    }
-
-    private void printEditor(UserResponseTo profile) {
-
     }
 
     private void handleProfileUpdate(UserResponseTo profile) {
@@ -55,6 +53,6 @@ public class ProfileEditorMenu implements Command {
                 throw new RuntimeException(e.getMessage());
             }
         }
-        openMenu(invoker, this);
+        openMenu(invoker, new ProfileMenu(commandContext));
     }
 }

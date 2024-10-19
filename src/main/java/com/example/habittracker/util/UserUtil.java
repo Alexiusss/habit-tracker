@@ -22,7 +22,7 @@ import java.util.Set;
 public class UserUtil {
 
     public static final String INSERT_USER_SQL = "INSERT INTO entity.users (version, name, email, password) VALUES (?, ?, ?, ?)";
-    public static final String UPDATE_USER_SQL = "UPDATE entity.users SET modified_at=?, version=?, name=?, email=?, password=? WHERE id=?";
+    public static final String UPDATE_USER_SQL = "UPDATE entity.users SET modified_at=?, version=?, name=?, email=?, password=?, is_active=? WHERE id=?";
     public static final String SELECT_ALL_USERS_SQL = "SELECT * FROM entity.users";
     public static final String SELECT_USER_BY_ID_SQL = "SELECT * FROM entity.users WHERE id=?";
     public static final String SELECT_USER_BY_EMAIL_SQL = "SELECT * FROM entity.users WHERE email=?";
