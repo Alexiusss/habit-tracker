@@ -46,7 +46,7 @@
 
 6. Run the application:
     ```bash
-    java -jar ./target/*.jar
+    java -jar ./target/habittracker-1.0-jar-with-dependencies.jar
     ```
 
     Credentials for admin access:
